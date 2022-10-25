@@ -1,0 +1,1 @@
+GuessTheNumber(user)
