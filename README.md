@@ -20,3 +20,7 @@
 - Clock Application Project: [see detail](https://github.com/williamvietnam/python/tree/main/pygame/clock)
 - Flappy Bird Game Project: see detail
 - etc...
+
+````
+Author: William Giang Nguyen
+(Developer from Vietnam)
