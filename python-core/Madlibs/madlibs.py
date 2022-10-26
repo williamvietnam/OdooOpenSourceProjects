@@ -1,7 +1,7 @@
 # theory string concat
 # suppose we want to create a string that say "subscribe to ______"
 author = "William Giang Nguyen"  # some string variable
-# a few wats to do this
+# a few ways to do this
 print("subscribe to " + author)
 print("subscribe to {}".format(author))
 print(f"subscribe to {author}")
