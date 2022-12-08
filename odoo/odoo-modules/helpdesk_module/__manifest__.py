@@ -12,8 +12,8 @@
     'depends': [
     ],
     'data': [
-        'views/help_desk_view.xml',
         'security/ir.model.access.csv',
+        'views/helpdesk_view.xml',
     ],
     'installable': True,
     'application': True,

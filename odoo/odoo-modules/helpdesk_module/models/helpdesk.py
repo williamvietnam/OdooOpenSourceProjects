@@ -1,9 +1,9 @@
 from odoo import api, fields, models, _
 
 
-class HelpdeskModel(models.Model):
-    _name = "helpdesk.model"
-    _description = "Helpdesk Model"
+class Helpdesk(models.Model):
+    _name = "helpdesk"
+    _description = "Helpdesk"
 
     tickets = fields.Char('My Tickets')
     performance = fields.Char('My Performance')

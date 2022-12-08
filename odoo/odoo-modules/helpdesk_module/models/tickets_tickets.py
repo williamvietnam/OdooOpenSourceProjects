@@ -1,9 +1,9 @@
 from odoo import api, fields, models, _
 
 
-class TicketsTicketsModel(models.Model):
-    _name = "tickets.tickets.model"
-    _description = "Tickets Tickets Model"
+class TicketsTickets(models.Model):
+    _name = "tickets.tickets"
+    _description = "Tickets Tickets"
 
     name = fields.Char("Name", required=True)
     helpdesk_team = fields.Char("Helpdesk Team", required=True)
