@@ -1,7 +1,7 @@
 {
     'name': 'Helpdesk',
     'version': '1.0',
-    'author': 'NBGSoftware',
+    'author': 'NBG',
     'category': 'Helpdesk',
     'sequence': 5,
     'summary': 'Track support tickets',
@@ -12,8 +12,8 @@
     'depends': [
     ],
     'data': [
-        'security/ir.model.access.csv',
         'views/helpdesk_view.xml',
+        'security/ir.model.access.csv',
     ],
     'installable': True,
     'application': True,
