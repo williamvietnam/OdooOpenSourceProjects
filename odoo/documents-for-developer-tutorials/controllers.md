@@ -1,6 +1,42 @@
-1. Lý thuyết
+## Lý thuyết
 
-2. Đoạn mã bên dưới minh hoạ một số trường hợp thường dùng controller để tạo url link:
+[Xem thêm](https://www.odoo.com/documentation/14.0/developer/reference/addons/http.html)
+
+#### 1. **Routing**  [Xem chi tiết](https://www.odoo.com/documentation/14.0/developer/reference/addons/http.html#routing)
+
+@odoo.http.route(route=None, **kw) | **kw: type, auth, methods, cors, csrf
+
+_Parameters_:
+
+- route: string or array. Route sẽ xác định yêu cầu http nào sẽ khớp với the decorated method. Có thể là một chuỗi đơn
+  hoặc một mảng các chuỗi
+- type: 'http' hoặc 'json' | http: thường dùng để tạo một url giúp điều hướng web tới đó, json: thường dùng để tạo api
+- auth: gồm 3 loại xác thực
+    + user: Người dùng BẮT BUỘC PHẢI đăng nhập để truy cập vào route
+    + public: Người dùng có thể hoặc ko cần đăng nhập để truy cập vào route
+    + none: luôn luôn truy cập đc (kể cả ko có database)
+- methods: Một chuỗi http methods mà route áp dụng. Nếu ko truyền tham số này, all methods đều được cho phép.
+- ...
+
+Decorator marking the decorated method as being a handler for requests. The method must be part of a subclass of
+Controller.
+(Decorator đánh dấu the decorated method là một trình xử lý các yêu cầu. Phương thức này phải là một phần của lớp con
+của Controller.)
+
+#### 2. **Request**  [Xem chi tiết](https://www.odoo.com/documentation/14.0/developer/reference/addons/http.html#request)
+
+
+#### 3. **Response**  [Xem chi tiết](https://www.odoo.com/documentation/14.0/developer/reference/addons/http.html#response)
+
+odoo.http.Response(*args, **kw) | Parameters:
+
+- template (basestring) – template to render
+- qcontext (dict) – Rendering context to use
+- uid (int) – User id to use for the ir.ui.view render call, None to use the request’s user (the default)
+
+## Demo Odoo Controllers
+
+1. Đoạn mã bên dưới minh hoạ một số trường hợp thường dùng controller để tạo url link:
 
 ```python
 import json
@@ -49,11 +85,13 @@ class DemoControllers(http.Controller):
 
 ```
 
-3. Kế thừa một hàm trong Controllers class
+2. Kế thừa một hàm trong Controllers class
 
 - main.py file (into controllers folder | direct: addons/controllers/main.py)
+
 ```python
 from odoo import http
+
 
 class DemoControllers(http.Controller):
     @http.route('/demo', auth='public', type='http')
@@ -62,9 +100,11 @@ class DemoControllers(http.Controller):
 ```
 
 - main_inherit.py file (into controllers folder | direct: addons/controllers/main_inherit.py)
+
 ```python
 from odoo import http
 from addons.controllers.main import DemoControllers
+
 
 class DemoControllerInherits(DemoControllers):
     @http.route('/demo/inherits')
