@@ -34,6 +34,32 @@ odoo.http.Response(*args, **kw) | Parameters:
 - qcontext (dict) – Rendering context to use
 - uid (int) – User id to use for the ir.ui.view render call, None to use the request’s user (the default)
 
+
+#### Đối tượng có thể chứa các trường dữ liệu thuộc 3 loại sau: đơn giản, quan hệ, và chức năng
+ - Loại đơn giản là các kiểu dữ liệu như: số nguyên, chấm động, boolean, chuỗi.. 
+ - Các trường có kiểu dữ liệu quan hệ biểu thị cho các mối quan hệ giữa các đối tượng (one2many, many2one, many2many).
+ - Theo mặc định, các trường có kiểu dữ liệu là chức năng sẽ không được lưu trữ trong cơ sở dữ liệu mà được tính toán lại mỗi lần chạy.
+
+
+#### Các thuộc tính có thể có trong tất cả các trường dữ liệu:
+ - string: nhãn của trường (bắt buộc phải có)
+ - required: nếu là True thì bắt buộc người dùng phải nhập dữ liệu vào trường này
+ - readonly: nếu là True thì người dùng không thể thay đổi dữ liệu trường này.
+ - help: giải thích, hướng dẫn cho trường dữ liệu này
+ - select: 1 để đưa trường này vào màn hình tìm kiếm và để giúp tối ưu cho việc lọc danh sách (được đánh dấu index trong csdl)
+ - context: là một dictionaries chứa các tham số về ngữ cảnh như: ngôn ngữ sử dụng là gì, múi giờ là gì, model nào đang đang được sử dụng, id là bao nhiêu..
+   Ví dụ: {‘lang’: ‘en_us’, ‘tz’: ‘UTC’, …}
+ - change_default: nếu là True thì trường này có thể sử dụng để làm điều kiện để thay đổi các giá trị mặc định của một đối tượng.
+ - states: thay đổi thuộc tính của trường này dựa vào trường state.
+
+#### field đơn giản
+
+#### field quan hệ
+
+
+#### field chức năng
+
+
 ## Demo Odoo Controllers
 
 1. Đoạn mã bên dưới minh hoạ một số trường hợp thường dùng controller để tạo url link:
@@ -112,3 +138,4 @@ class DemoControllerInherits(DemoControllers):
         super(DemoControllers, self).demo_1()
         return "inherited successfully"
 ```
+
