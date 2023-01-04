@@ -1,7 +1,10 @@
 ## [Odoo Repository]()
-1. Tutorial documents
-2. Odoo modules
-3. Odoo projects
+#### 1. Odoo ERP & CRM basic course 
+#### 2. Odoo Python Framework course
+#### 3. Odoo Javascript Framework course
+#### 4. ODOO Modules OpenSource
+#### 5. ODOO Projects
+#### 6. StackOverflow Q&A
 
 ## [Django projects Repository](https://github.com/williamvietnam/python/tree/main/django):
 1. Tutorials Project: Basic knowledge is collected and demo. [See detail](https://github.com/williamvietnam/python/tree/main/django/tutorials)
