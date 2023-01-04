@@ -1,3 +1,8 @@
+## [Odoo Repository]()
+1. Tutorial documents
+2. Odoo modules
+3. Odoo projects
+
 ## [Django projects Repository](https://github.com/williamvietnam/python/tree/main/django):
 1. Tutorials Project: Basic knowledge is collected and demo. [See detail](https://github.com/williamvietnam/python/tree/main/django/tutorials)
 2. URLs Shortner Project: [See detail](https://github.com/williamvietnam/python/tree/main/django/urls_shortner_project)
@@ -12,19 +17,6 @@
 5. Hangman Project: [see detail](https://github.com/williamvietnam/python/tree/main/python-core/Hangman)
 6. Tic Tac Toe Project: [see detail](https://github.com/williamvietnam/python/tree/main/python-core/TicTacToe)
 
-## [Odoo Repository]()
-1. Tutorial documents
-2. Odoo modules
-3. Odoo projects
-
-## [Kivy projects Repository](https://github.com/williamvietnam/python/tree/main/kivy):
-- Tutorials Project: Basic knowledge is collected and demo. [See detail](https://github.com/williamvietnam/python/tree/main/kivy/tutorials)
-- etc...
-
-## [Pygame projects Repository](https://github.com/williamvietnam/python/tree/main/pygame):
-- Clock Application Project: [see detail](https://github.com/williamvietnam/python/tree/main/pygame/clock)
-- Flappy Bird Game Project: see detail
-- etc...
 
 ````
 Author: William Giang Nguyen
