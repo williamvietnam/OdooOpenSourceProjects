@@ -1,1 +1,0 @@
-GuessTheNumber(computer)
