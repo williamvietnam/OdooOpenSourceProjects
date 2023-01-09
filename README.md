@@ -9,7 +9,7 @@
 (Kho chứa các mô đun mã nguồn mở của ODOO)
 #### 5. ODOO Discussions Q&A
 (Kho chứa các cuộc thảo luận hỏi-đáp về ODOO)
-
+haha
 ```
 Author: William Giang Nguyen
 (Developer from Vietnam)
