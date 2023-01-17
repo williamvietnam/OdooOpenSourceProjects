@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ui_app_system,access_ui_app_system,model_ui_app,base.group_system,1,1,1,1
+access_ui_app_user,access_ui_app_user,model_ui_app,base.group_user,1,0,0,0
+access_ui_app_portal,access_ui_app_portal,model_ui_app,base.group_portal,1,0,0,0
+access_ui_app_category_system,access_ui_app_category_system,model_ui_app_category,base.group_system,1,1,1,1
+access_ui_app_category_user,access_ui_app_category_user,model_ui_app_category,base.group_user,1,0,0,0
+access_ui_app_category_portal,access_ui_app_category_portal,model_ui_app_category,base.group_portal,1,0,0,0
