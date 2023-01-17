@@ -1,0 +1,128 @@
+.background-app-item {
+  width: 100%;
+  min-width: 0px;
+  max-width: 100%;
+  overflow-x: hidden !important;
+  display: grid !important;
+  grid-template-columns: repeat(8, minmax(150px, 1fr));
+  gap: 10px;
+}
+.background-app-item .app-item {
+  max-height: 100px;
+  width: unset !important;
+  display: flex;
+  align-items: flex-start;
+}
+.background-app-item .app-item img {
+  min-width: 70px;
+  height: 70px;
+}
+.background-app-item .app-item .o_kanban_record_title h4 {
+  max-height: 50%;
+}
+.background-app-item .oe_module_desc > h4 {
+  margin-right: 20px;
+  max-width: 100%;
+  white-space: unset;
+  overflow: unset;
+  text-overflow: unset;
+  vertical-align: unset;
+  margin: unset !important;
+}
+.background-app-item .oe_module_desc > h4 span {
+  white-space: break-spaces;
+}
+.background-app-item .oe_module_action:first-of-type {
+    width:calc(100% - 20px);
+    float:left;
+    height:calc(100% - 30px);
+    position:absolute;
+    top:0;
+    left:10px;
+
+}
+.background-app-item .oe_module_action:first-of-type span{
+    width:100%;
+    min-height:30px;
+    line-height:15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.background-app-item .oe_module_desc{
+    position: relative;
+    height: 100%;
+    display: block;
+    width: 100%;
+    margin-right: 10px;
+}
+.background-app-item .oe_module_action:last-of-type {
+    width:100%;
+    float:left;
+    position:absolute;
+    top: 40px;
+    bottom:0;
+    left:10px;
+}
+.background-app-item .oe_module_action:last-of-type button{
+    height:30px;
+}
+.custom_kanban_title_item span {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.background-app-item .oe_module_icon + .oe_module_desc {
+
+}
+.background-app-item .o_dropdown_kanban{
+    visibility : unset !important ;
+}
+@media only screen and (min-width: 1400px) {
+  .background-app-item {
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .background-app-item .app-item {
+    width: unset !important;
+  }
+  .background-app-item .app-item img {
+    min-width: 70px;
+    height: 70px;
+  }
+}
+@media only screen and (max-width: 1400px) {
+  .background-app-item {
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+@media only screen and (max-width: 800px) {
+  .background-app-item {
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+@media only screen and (max-width: 600px) {
+  .background-app-item {
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  }
+}
+@media only screen and (max-width: 350px) {
+  .background-app-item {
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+}
