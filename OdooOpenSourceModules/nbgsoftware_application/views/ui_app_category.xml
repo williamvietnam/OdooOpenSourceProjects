@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="ui_app_category_view_tree" model="ir.ui.view">
+        <field name="name">ui.app.category.view.tree</field>
+        <field name="model">ui.app.category</field>
+        <field name="arch" type="xml">
+            <tree export_xlsx="0">
+                <field name="name" decoration-bf="1" optional="show"/>
+                <field name="ui_app_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ui_app_category_filter" model="ir.ui.view">
+        <field name="name">view.ui_app.category.filter</field>
+        <field name="model">ui.app.category</field>
+        <field name="arch" type="xml">
+            <search string="Search apps">
+                <field name="name"/>
+                <field name="parent_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Parent Category" name="group_by_parent" domain="[]"
+                            context="{'group_by':'parent_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="ui_app_category_view_form" model="ir.ui.view">
+        <field name="name">ui.app.category.view.form</field>
+        <field name="model">ui.app.category</field>
+        <field name="arch" type="xml">
+            <form duplicate="false">
+                <sheet>
+                    <group>
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" class="o_text_overflow"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="category_child_ids" invisible="1"/>
+                            <field name="parent_id" domain="[('id', 'not in', category_child_ids), ('id', '!=', active_id)]"/>
+                        </group>
+                        <group>
+                            <field name="ui_app_ids" widget="many2many_tags" options="{'no_create': True}"
+                                   domain="[('category_id', '=', False)]"
+                                   kanban_view_ref="%(nbgsoftware_application.ui_app_default_view_kanban)s"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
