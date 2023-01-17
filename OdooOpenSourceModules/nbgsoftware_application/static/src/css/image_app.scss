@@ -1,0 +1,7 @@
+.note_image_app {
+    display:flex !important;
+    justify-content:center !important;
+    & > span{
+        opacity: 0.7;
+    }
+}
