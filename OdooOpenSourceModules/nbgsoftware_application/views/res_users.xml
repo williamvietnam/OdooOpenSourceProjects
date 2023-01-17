@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_users_app_inherit" model="ir.ui.view">
+        <field name="name">res.users.app.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='references']" position="after">
+                <page string="Custom App" name="custom_apps">
+                    <field name="custom_app_ids" string="Custom App" domain="[('is_custom_app', '=', True)]" widget="many2many_tags"
+                           options="{'no_create': True}" kanban_view_ref="%(nbgsoftware_application.ui_app_default_view_kanban)s">
+                        <tree>
+                            <field name="name"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

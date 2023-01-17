@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="ui_app_view_tree" model="ir.ui.view">
+        <field name="name">ui.app.view.tree</field>
+        <field name="model">ui.app</field>
+        <field name="arch" type="xml">
+            <tree export_xlsx="0" default_order="name">
+                <field name="name" decoration-bf="1"/>
+                <field name="web_icon" widget="image" class="img-fluid-custom" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ui_app_filter" model="ir.ui.view">
+        <field name="name">view.ui.app.filter</field>
+        <field name="model">ui.app</field>
+        <field name="arch" type="xml">
+            <search string="Search apps">
+                <field name="name"/>
+                <searchpanel>
+                    <field name="category_id" string="Categories" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ui_app_view_kanban_system">
+        <field name="name">Apps Kanban</field>
+        <field name="model">ui.app</field>
+        <field name="arch" type="xml">
+            <kanban class="background-app-item" js_class="app_kanban_view" default_order="name">
+                <field name="name"/>
+                <field name="url"/>
+                <field name="web_icon"/>
+                <field name="icon_url"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_module_vignette app-item">
+                            <div class="o_dropdown_kanban dropdown" tabindex="-1" groups="base.group_system">
+                                <a class="dropdown-toggle o-no-caret btn" data-toggle="dropdown" data-display="static"
+                                   href="#" role="button" aria-label="Dropdown menu" title="Dropdown menu">
+                                    <span class="fa fa-ellipsis-v"/>
+                                </a>
+                                <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <a type="edit" class="dropdown-item">Edit</a>
+                                    <a type="delete" class="dropdown-item">Delete</a>
+                                </div>
+                            </div>
+                            <img t-attf-src="#{record.icon_url.value}" class="oe_module_icon" alt="Icon"/>
+                            <div class="oe_module_desc">
+                                <div class="oe_module_action">
+                                    <h4 class="o_kanban_record_title custom_kanban_title_item">
+                                        <field name="name"/>
+                                    </h4>
+                                </div>
+                                <div class="oe_module_action">
+                                    <button type="object" class="btn btn-primary btn-sm"
+                                            name="button_immediate_open">OPEN
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ui_app_view_kanban_custom">
+        <field name="name">Apps Kanban</field>
+        <field name="model">ui.app</field>
+        <field name="arch" type="xml">
+            <kanban class="background-app-item" default_order="name">
+                <field name="name"/>
+                <field name="url"/>
+                <field name="web_icon"/>
+                <field name="icon_url"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_module_vignette app-item">
+                            <div class="o_dropdown_kanban dropdown" tabindex="-1" groups="base.group_system">
+                                <a class="dropdown-toggle o-no-caret btn" data-toggle="dropdown" data-display="static"
+                                   href="#" role="button" aria-label="Dropdown menu" title="Dropdown menu">
+                                    <span class="fa fa-ellipsis-v"/>
+                                </a>
+                                <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <a type="edit" class="dropdown-item">Edit</a>
+                                    <a type="delete" class="dropdown-item">Delete</a>
+                                </div>
+                            </div>
+                            <img t-attf-src="#{record.icon_url.value}" class="oe_module_icon" alt="Icon"/>
+                            <div class="oe_module_desc">
+                                <div class="oe_module_action">
+                                    <h4 class="o_kanban_record_title custom_kanban_title_item">
+                                        <field name="name"/>
+                                    </h4>
+                                </div>
+                                <div class="oe_module_action">
+                                    <button type="object" class="btn btn-primary btn-sm"
+                                            name="button_immediate_open">OPEN
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ui_app_default_view_kanban">
+        <field name="name">Apps Kanban Default</field>
+        <field name="model">ui.app</field>
+        <field name="arch" type="xml">
+            <kanban default_order="name">
+                <field name="name"/>
+                <field name="url"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_module_vignette app-item">
+                            <div class="oe_module_desc">
+                                <div class="oe_module_action">
+                                    <h4 class="o_kanban_record_title custom_kanban_title_item">
+                                        <field name="name"/>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="ui_app_view_form" model="ir.ui.view">
+        <field name="name">ui.app.view.form</field>
+        <field name="model">ui.app</field>
+        <field name="arch" type="xml">
+            <form duplicate="false" js_class="app_form_view">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="app_link_name" attrs="{'invisible': [('is_custom_app', '=', False)]}"/>
+                            <field name="menu_id" attrs="{'invisible': [('is_custom_app', '=', True)]}"
+                                   options="{'no_create': True, 'no_edit':True, 'no_open': True}"
+                                   context="{'tree_view_ref': 'nbgsoftware_application.ui_menu_view_tree'}"/>
+                            <field name="category_id" options="{'no_open': True}"/>
+                            <field name="is_custom_app" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="url" widget="url" attrs="{'readonly': [('is_custom_app', '=', False)]}"
+                                   force_save="1"/>
+                            <field name="web_icon" widget="image"
+                                   attrs="{'readonly': [('is_custom_app', '=', False)]}"/>
+                        </group>
+                        <group></group>
+                        <group attrs="{'invisible': [('is_custom_app', '=', False)]}">
+                            <div class="o_row note_image_app">
+                                <span>Optimal image size: 200px * 200px</span>
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

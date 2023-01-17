@@ -1,4 +1,99 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
 
+    <record id="action_all_app" model="ir.actions.act_window">
+        <field name="name">Home</field>
+        <field name="res_model">ui.app</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="view_ui_app_filter"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('ui_app_home_view_kanban')}),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('ui_app_home_view_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('ui_app_home_view_form')})]"/>
+        <field name="help" type="html">
+            <p class='o_view_nocontent_smiling_face'>
+                No apps found.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_system_app" model="ir.actions.act_window">
+        <field name="name">System Apps</field>
+        <field name="res_model">ui.app</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="view_ui_app_filter"/>
+        <field name="domain">[('is_custom_app', '=', False)]</field>
+        <field name="context">{}</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('ui_app_view_kanban_system')}),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('ui_app_view_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('ui_app_view_form')})]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No apps found. Let's create one!
+            </p>
+        </field>
+    </record>
+
+    <record id="action_custom_app" model="ir.actions.act_window">
+        <field name="name">Custom Apps</field>
+        <field name="res_model">ui.app</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="view_ui_app_filter"/>
+        <field name="domain">[('is_custom_app', '=', True)]</field>
+        <field name="context">{'default_is_custom_app': 1}</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('ui_app_view_kanban_custom')}),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('ui_app_view_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('ui_app_view_form')})]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No apps found. Let's create one!
+            </p>
+        </field>
+    </record>
+
+    <record id="action_app_category" model="ir.actions.act_window">
+        <field name="name">Categories</field>
+        <field name="res_model">ui.app.category</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_ui_app_category_filter"/>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_group_by_parent': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No categories found. Let's create one!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_nbgsoftware_root" name="Employee App" groups="base.group_user"
+              web_icon="nbgsoftware_application,static/description/icon.png">
+        <menuitem id="all_app"
+                  name="Home"
+                  action="action_all_app"
+                  sequence="1"/>
+        <menuitem id="system_app"
+                  name="System App"
+                  action="action_system_app"
+                  sequence="2"/>
+        <menuitem id="custom_app"
+                  name="Custom App"
+                  action="action_custom_app"
+                  sequence="3"/>
+        <menuitem id="menu_nbgsoftware_application_config"
+                  name="Configuration"
+                  groups="base.group_user"
+                  sequence="8"/>
+    </menuitem>
+
+    <menuitem id="menu_ui_app_category"
+              name="Categories"
+              parent="menu_nbgsoftware_application_config"
+              action="action_app_category"
+              groups="base.group_system"
+              sequence="1"/>
+
 </odoo>

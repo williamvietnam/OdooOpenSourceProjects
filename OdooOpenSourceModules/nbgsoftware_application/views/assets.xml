@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template>
-
-    </template>
+        <template id="assets_backend" name="nbgsoftware assets backend" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/nbgsoftware_application/static/src/js/kanban_view.js"/>
+                <script type="text/javascript" src="/nbgsoftware_application/static/src/js/list_renderer.js"/>
+                <script type="text/javascript" src="/nbgsoftware_application/static/src/js/home_list.js"/>
+                <script type="text/javascript" src="/nbgsoftware_application/static/src/js/form_view.js"/>
+                <script type="text/javascript" src="/nbgsoftware_application/static/src/js/form_home_view.js"/>
+                <script type="text/javascript" src="/nbgsoftware_application/static/src/js/list_controller.js"/>
+                <script type="text/javascript" src="/nbgsoftware_application/static/src/js/dialog.js"/>
+                <link rel="stylesheet" type="text/scss" href="/nbgsoftware_application/static/src/css/image_app.scss"/>
+                <link rel="stylesheet" type="text/scss" href="/nbgsoftware_application/static/src/css/kanban.css"/>
+            </xpath>
+        </template>
+        <template id="assets_frontend" name="nbgsoftware assets frontend" inherit_id="web.assets_frontend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/nbgsoftware_application/static/src/js/portal_app.js"/>
+                <link rel="stylesheet" type="text/scss" href="/nbgsoftware_application/static/src/css/portal.scss"/>
+            </xpath>
+        </template>
 </odoo>
