@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="redirect_home_action_users" model="ir.cron">
+        <field name="name">Update Home Action Users</field>
+        <field name="model_id" ref="model_res_users"/>
+        <field name="state">code</field>
+        <field name="code">model._redirect_home_action_users()</field>
+        <field name='active' eval="False"/>
+    </record>
+</odoo>

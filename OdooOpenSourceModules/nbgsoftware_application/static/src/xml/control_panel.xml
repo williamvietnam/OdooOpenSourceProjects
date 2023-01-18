@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<t t-name="ControlPanel" t-inherit="web_enterprise.ControlPanel" t-inherit-mode="extension" owl="1">
+    <xpath expr="//button[hasclass('o_toggle_searchview_full')]" position="attributes">
+        <attribute name="t-if">props.view.base_model !== 'ui.app' and props.view.base_model !== 'ui.app.category' and props.view.model !== 'ir.ui.menu' and  props.view.model !== 'ui.app.category'</attribute>
+    </xpath>
+    <xpath expr="//div[hasclass('o_cp_buttons')]" position="after">
+        <ActionMenus t-if="props.actionMenus and props.actionMenus.items" t-props="props.actionMenus"/>
+    </xpath>
+</t>
+
+</templates>
