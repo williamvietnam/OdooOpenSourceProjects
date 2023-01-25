@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_document_document_filter" model="ir.ui.view">
+        <field name="name">view.document.document.filter</field>
+        <field name="model">document.document</field>
+        <field name="arch" type="xml">
+            <search string="Search documents">
+                <field name="name"/>
+                <searchpanel>
+                    <field name="folder_id"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="document_document_view_tree" model="ir.ui.view">
+        <field name="name">document.document.view.tree</field>
+        <field name="model">document.document</field>
+        <field name="arch" type="xml">
+            <tree export_xlsx="0">
+                <field name="name" optional="show"/>
+                <field name="folder_id" optional="show"/>
+                <field name="mimetype" optional="hide"/>
+                <field name="file_size" optional="show"/>
+                <field name="is_public" widget="boolean_toggle" optional="show"/>
+                <field name="create_date" optional="show"/>
+                <field name="create_uid" optional="show"/>
+                <field name="portal_ids" optional="show" widget="many2many_tags"
+                       attrs="{'invisible': [('is_public', '=', True)]}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="document_document_view_form" model="ir.ui.view">
+        <field name="name">document.document.view.form</field>
+        <field name="model">document.document</field>
+        <field name="arch" type="xml">
+            <form duplicate="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="file_data" filename="name"/>
+                            <field name="name" invisible="1"/>
+                            <label for="file_size" string="File Size" id="label_file_size"/>
+                            <div class="o_row">
+                                <field name="file_size" class="oe_inline"/>
+                                bytes
+                            </div>
+                            <field name="folder_id"/>
+                            <field name="document_public_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="is_public" widget="boolean_toggle"/>
+                            <field name="portal_ids" widget="many2many_tags"
+                                   attrs="{'invisible': [('is_public', '=', True)]}" options="{'no_create': True}"/>
+                            <field name="create_date"/>
+                            <field name="create_uid"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_document_document_kanban" model="ir.ui.view">
+        <field name="name">document.document.view.kanban</field>
+        <field name="model">document.document</field>
+        <field name="arch" type="xml">
+            <kanban js_class="usmh_document_kanban">
+                <field name="id" attrs="{'invisible': True}"/>
+                <field name="name" invisible="1"/>
+                <field name="file_data" widget="binary" filename="name"/>
+                <field name="folder_id"/>
+                <field name="file_size"/>
+                <field name="create_date"/>
+                <field name="attachment_id"/>
+                <field name="mimetype"/>
+                <field name="type"/>
+                <field name="is_public"/>
+                <templates>
+                    <t t-name="kanban-box" modifiers="{}">
+                        <t t-set="fileRequest" t-value="record.type.raw_value === 'empty'" modifiers="{}"/>
+                        <div t-attf-class="oe_kanban_global_area o_document_draggable o_kanban_attachment o_documents_attachment {{fileRequest ? 'oe_file_request' : ''}}"
+                             t-att-data-id="record.id.raw_value" modifiers="{}">
+                            <div class="custom o_dropdown_kanban dropdown" tabindex="-1" groups="base.group_user">
+                                <a class="dropdown-toggle o-no-caret btn" data-toggle="dropdown" data-display="static"
+                                   href="#" role="button" aria-label="Dropdown menu" title="Dropdown menu">
+                                    <span class="fa fa-ellipsis-v"/>
+                                </a>
+                                <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <a type="edit" class="dropdown-item">Edit</a>
+                                    <a type="delete" class="dropdown-item">Delete</a>
+                                </div>
+                            </div>
+                            <div t-attf-class="o_kanban_image #{fileRequest ? 'o_request_image' : ''}" modifiers="{}">
+                                <t t-set="webimage"
+                                   t-value="new RegExp('image.*(gif|jpeg|jpg|png)').test(record.mimetype.value)"
+                                   modifiers="{}"/>
+                                <div name="document_preview"
+                                     t-attf-class="ks_kanban_preview o_kanban_image_wrapper"
+                                     t-att-title="fileRequest ? 'Upload file' : ''" modifiers="{}">
+                                    <t t-if="webimage">
+                                        <img alt="Image"
+                                             t-att-src="kanban_image('document.document', 'file_data', record.id.raw_value)"
+                                             class="o_attachment_image"/>
+                                    </t>
+                                    <div t-else="!webimage"
+                                         class="o_image o_image_thumbnail o_kanban_image_wrapper"
+                                         t-att-data-mimetype="record.mimetype.value"/>
+                                </div>
+                            </div>
+                            <div class="o_kanban_details">
+                                <div class="o_kanban_details_wrapper o_kanban_details_imager">
+                                    <div t-att-title="record.name.raw_value" class="o_kanban_record_title">
+                                        <strong>
+                                            <field name="name"/>
+                                        </strong>
+                                        <h6>
+                                            <field name="file_size"/>
+                                            bytes
+                                        </h6>
+                                    </div>
+                                    <div class="o_kanban_record_bottom flex-wrap">
+                                        <time class="oe_kanban_bottom_left">
+                                            <h6>
+                                                <field name="create_date" widget="date"/>
+                                            </h6>
+                                        </time>
+                                        <div>
+                                            <button name="save_to_file" string="Download file" type="object"
+                                                    class="btn btn-secondary fa fa-download"/>
+                                            <span class="text-success mb4" t-if="record.is_public.raw_value">
+                                                <i class="fa fa-circle" role="img" aria-label="Public"
+                                                   title="Public"></i>
+                                            </span>
+                                            <span class="text-gray mb4" t-if="!record.is_public.raw_value">
+                                                <i class="fa fa-circle" role="img" aria-label="Unpublic"
+                                                   title="Unpublic"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

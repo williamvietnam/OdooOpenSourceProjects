@@ -1,0 +1,28 @@
+.table-container{
+    display: flex;
+}
+.sidebar{
+    width: 20%;
+}
+.table-content{
+    width: 80%;
+}
+.custom-nav {
+    padding-left: 15px !important;
+}
+@media only screen and (min-width: 300px) and (max-width: 800px){
+    .custom_container {
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+        zoom: 0.80;
+    }
+    .table-content {
+        width: 100%;
+    }
+
+    .table-content td {
+        word-break: break-word;
+        min-width: 65px;
+    }
+
+}

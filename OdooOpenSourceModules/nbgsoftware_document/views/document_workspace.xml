@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="document_workspace_view_tree" model="ir.ui.view">
+        <field name="name">document.workspace.view.tree</field>
+        <field name="model">document.folder</field>
+        <field name="arch" type="xml">
+            <tree export_xlsx="0">
+                <field name="sequence" widget="handle"/>
+                <field name="display_name" string="Name"/>
+                <field name="document_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_document_workspace_filter" model="ir.ui.view">
+        <field name="name">view.document.workspace.filter</field>
+        <field name="model">document.folder</field>
+        <field name="arch" type="xml">
+            <search string="Search ducument">
+                <field name="name"/>
+                <field name="parent_folder_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Parent Workspaces" name="group_by_workspace" domain="[]"
+                            context="{'group_by':'parent_folder_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="document_workspace_view_form" model="ir.ui.view">
+        <field name="name">document.workspace.view.form</field>
+        <field name="model">document.folder</field>
+        <field name="arch" type="xml">
+            <form duplicate="false">
+                <sheet>
+                    <group>
+                        <label for="name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="document_child_ids" invisible="1"/>
+                            <field name="parent_folder_id" options="{'no_open': True,}"
+                                   domain="[('id', 'not in', document_child_ids),('id', '!=', id)]"/>
+                        </group>
+                        <group>
+                            <field name="document_ids" widget="many2many_tags" options="{'no_create': True}"
+                                   domain="[('folder_id', '=', False)]"
+                                   kanban_view_ref="%(usmh_document.view_document_document_kanban)s"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="description" widget="html"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

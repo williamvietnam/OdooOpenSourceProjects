@@ -1,0 +1,121 @@
+<odoo>
+
+    <template id="portal_my_home_menu_document" name="Portal layout : documents menu entries"
+              inherit_id="portal.portal_breadcrumbs" priority="10">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'document'" class="breadcrumb-item active}" style="font-size: 35px;">
+                <a href="/my/document">Document</a>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_document" name="Portal My Home : document entries" inherit_id="portal.portal_my_home"
+              priority="10">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Document</t>
+                <t t-set="url" t-value="'/document'"/>
+                <t t-set="count" t-value="document_count"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="categories_recursive" name="Category list">
+        <li class="nav-item" t-if="c.check_has_document()">
+            <a t-att-href="keep('/document/category/' + slug(c), category=0)"
+               t-attf-class="nav-link #{'active' if c.id == category.id else ''}">
+                <span t-field="c.name"/>
+            </a>
+            <ul t-if="c.document_child_ids" class="nav custom-nav nav-pills flex-column nav-hierarchy">
+                <t t-foreach="c.document_child_ids" t-as="c">
+                    <t t-if="c.check_has_document()">
+                        <t t-call="usmh_document.categories_recursive"/>
+                    </t>
+                </t>
+            </ul>
+        </li>
+    </template>
+
+    <template id="website_portal_my_document" name="My Document">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Your Documents</t>
+            </t>
+            <div class="container custom_container">
+                <div id="exTab2" class="order-table-wrapper table-container">
+                    <div class="collapse d-lg-block sidebar" id="wsale_products_categories_collapse">
+                        <ul class="nav custom-nav nav-pills flex-column mb-2">
+                            <li class="nav-item">
+                                <a t-att-href="keep('/document', category=0)"
+                                   t-attf-class="nav-link #{'' if category else 'active'} o_not_editable">All Documents
+                                </a>
+                            </li>
+                            <t t-foreach="categories" t-as="c">
+                                <t t-call="usmh_document.categories_recursive"/>
+                            </t>
+                        </ul>
+                    </div>
+                    <div class="tab-content table-content">
+                        <div role="tabpanel" class="tab-pane active" id="personal">
+                            <t t-if="not documents">
+                                <p>No document.</p>
+                            </t>
+                            <t t-if="documents">
+                                <style>
+                                    table.order-table tr th{
+                                    width: auto !important;
+                                    }
+                                    table.order-table td {
+                                    vertical-align: inherit;
+                                    }
+                                </style>
+                                <table class="table order-table table-striped table-hover o_my_status_table col-md-12"
+                                       width="100%">
+                                    <thead>
+                                        <tr class="active">
+                                            <th>Datas</th>
+                                            <th>Size</th>
+                                            <th>Mime Type</th>
+                                            <th>Create Date</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <t t-foreach="documents" t-as="document">
+                                        <t t-set="file_URL"
+                                           t-value="base_url + '/web/content/' + str(document.attachment_id.id)"/>
+                                        <tr>
+                                            <td class="cell_overflow">
+                                                <span t-field="document.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="document.file_size"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="document.mimetype"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="document.create_date"/>
+                                            </td>
+                                            <td>
+                                                <a t-att-href="base_url + '/web/content/?model=document.document&amp;id=' + str(document.id) + '&amp;field=file_data&amp;filename_field=name&amp;download=true' "
+                                                   class="pull-right" title="Download">
+                                                    <i class="fa fa-download fa-2x" role="img"
+                                                       aria-label="Download"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                                <div t-if="pager" class="o_portal_pager text-center">
+                                    <t t-call="website.pager"/>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

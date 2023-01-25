@@ -1,0 +1,12 @@
+.o_dropdown_kanban{
+    visibility : unset !important ;
+}
+.o_attachment_image{
+    cursor : zoom-in ;
+}
+.o_image_thumbnail{
+    cursor : zoom-in ;
+}
+.o_kanban_details_imager{
+    padding: 5px 8px 0 8px !important;
+}
