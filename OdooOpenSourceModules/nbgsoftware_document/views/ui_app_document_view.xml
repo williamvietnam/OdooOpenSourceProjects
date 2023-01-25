@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_ui_app_form" model="ir.ui.view">
+        <field name="name">view_ui_app_form</field>
+        <field name="model">ui.app</field>
+        <field name="inherit_id" ref="usmh_app_link.ui_app_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <label for="down_document" string="Document Url" id="label_document"
+                       attrs="{'invisible': [('is_custom_app', '=', False)]}"/>
+                <div class="o_row">
+                    <field name="down_document" class="oe_inline" nolabel="1"
+                           attrs="{'invisible': [('is_custom_app', '=', False)]}"/>
+                    <field name="app_document_id" class="oe_inline" nolabel="1"
+                           attrs="{'invisible': [('down_document', '=', False)]}" options="{'no_open': True}"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='url']" position="attributes">
+                <attribute name="attrs">{'invisible': [('down_document', '=', True)], 'readonly': [('is_custom_app',
+                    '=', False)]}
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_ui_app_kanban_custom" model="ir.ui.view">
+        <field name="name">view_ui_app_custom_kanban</field>
+        <field name="model">ui.app</field>
+        <field name="inherit_id" ref="usmh_app_link.ui_app_view_kanban_custom"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="replace">
+                <kanban class="background-app-item" js_class="usmh_document_kanban" default_order="name">
+                    <field name="id" attrs="{'invisible': True}"/>
+                    <field name="name"/>
+                    <field name="url"/>
+                    <field name="web_icon"/>
+                    <field name="icon_url"/>
+                    <field name="app_document_id"/>
+                    <field name="mimetype"/>
+                    <field name="type"/>
+                    <field name="attachment_id"/>
+                    <field name="down_document"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_module_vignette app-item">
+                                <div class="o_dropdown_kanban dropdown" tabindex="-1" groups="base.group_system">
+                                    <a class="dropdown-toggle o-no-caret btn" data-toggle="dropdown"
+                                       data-display="static"
+                                       href="#" role="button" aria-label="Dropdown menu" title="Dropdown menu">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <a type="edit" class="dropdown-item">Edit</a>
+                                        <a type="delete" class="dropdown-item">Delete</a>
+                                    </div>
+                                </div>
+                                <div t-attf-class="o_kanban_image">
+                                    <div name="document_preview"
+                                         t-attf-class="ks_kanban_preview o_kanban_image_wrapper o_image_thumbnail">
+                                        <img t-attf-src="#{record.icon_url.value}" class="oe_module_icon" alt="Icon"/>
+                                    </div>
+                                </div>
+                                <div class="oe_module_desc">
+                                    <div class="oe_module_action">
+                                        <h4 class="o_kanban_record_title custom_kanban_title_item">
+                                            <field name="name"/>
+                                        </h4>
+                                    </div>
+                                    <div class="oe_module_action">
+                                        <button type="object" class="btn btn-primary btn-sm"
+                                                name="button_immediate_open">OPEN
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_ui_app_kanban_home" model="ir.ui.view">
+        <field name="name">view_ui_app_home_kanban</field>
+        <field name="model">ui.app</field>
+        <field name="inherit_id" ref="usmh_app_link.ui_app_home_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="replace">
+                <kanban class="o_modules_kanban background-app-item" js_class="usmh_document_kanban" create="false"
+                        default_order="name">
+                    <field name="id" attrs="{'invisible': True}"/>
+                    <field name="name"/>
+                    <field name="url"/>
+                    <field name="web_icon"/>
+                    <field name="icon_url"/>
+                    <field name="app_document_id"/>
+                    <field name="mimetype"/>
+                    <field name="type"/>
+                    <field name="attachment_id"/>
+                    <field name="down_document"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_module_vignette app-item">
+                                <div t-attf-class="o_kanban_image">
+                                    <div name="document_preview"
+                                         t-attf-class="ks_kanban_preview o_kanban_image_wrapper o_image_thumbnail">
+                                        <img t-attf-src="#{record.icon_url.value}" class="oe_module_icon" alt="Icon"/>
+                                    </div>
+                                </div>
+                                <div class="oe_module_desc">
+                                    <div class="oe_module_action">
+                                        <h4 class="o_kanban_record_title app-title custom_kanban_title_item">
+                                            <field name="name"/>
+                                        </h4>
+                                    </div>
+                                    <div class="oe_module_action">
+                                        <button type="object" class="btn btn-primary btn-sm"
+                                                name="button_immediate_open">OPEN
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </xpath>
+        </field>
+    </record>
+</odoo>

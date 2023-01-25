@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-extend="Menu">
+        <t t-jquery=".o_menu_toggle" t-operation="inner">
+            <a class="o_menu_home_app menu-top" style="cursor: pointer"
+               autofocus="autofocus" aria-label="Top Menu"
+               accesskey="h">
+                Top menu
+            </a>
+        </t>
+    </t>
+</templates>

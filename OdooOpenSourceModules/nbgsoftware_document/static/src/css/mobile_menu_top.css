@@ -1,0 +1,7 @@
+@media only screen and (min-width: 360px) and (max-width: 740px){
+    .menu-top{
+        cursor: pointer;
+        position: absolute;
+        z-index: 1;
+    }
+}

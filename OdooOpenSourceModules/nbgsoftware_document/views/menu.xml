@@ -1,4 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <record id="action_document_document" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="res_model">document.document</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="view_document_document_filter"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="action_document_document_public" model="ir.actions.act_window">
+        <field name="name">Documents Public</field>
+        <field name="res_model">document.document.public</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="view_document_document_public_filter"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="action_document_workspace" model="ir.actions.act_window">
+        <field name="name">Workspaces</field>
+        <field name="res_model">document.folder</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_document_workspace_filter"/>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_group_by_workspace': 1}</field>
+    </record>
+
+    <menuitem id="menu_document_document"
+              name="Documents"
+              parent="usmh_app_link.menu_usmh_root"
+              sequence="4"/>
+    <menuitem id="menu_my_document_document"
+              name="My Documents"
+              parent="menu_document_document"
+              action="action_document_document"
+              sequence="1"/>
+    <menuitem id="menu_document_document_public"
+              name="Public Documents"
+              parent="menu_document_document"
+              action="action_document_document_public"
+              sequence="2"/>
+
+    <menuitem id="menu_document_workspace"
+              name="Workspaces"
+              parent="usmh_app_link.menu_usmh_applink_config"
+              action="action_document_workspace"
+              groups="base.group_user"
+              sequence="2"/>
 
 </odoo>
