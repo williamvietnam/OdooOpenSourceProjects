@@ -1,0 +1,71 @@
+@mixin o-details-modal($top: 0, $bottom: 0) {
+    position: fixed;
+    z-index: $zindex-modal;
+    right: 0;
+    top: $top;
+    bottom: $bottom;
+    left: 0;
+}
+
+@mixin o-details-modal-header {
+    padding: 0.7rem 1.4rem;
+    height: $o-navbar-height;
+}
+
+@mixin o-details-hide-caret {
+    // Hide the caret. For details see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary
+    list-style-type: none;
+    &::-webkit-details-marker {
+        display: none;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .o_controller_with_searchpanel {
+        flex-direction: column;
+
+        .o_renderer_with_searchpanel.o_list_view {
+            width: 100%;
+        }
+
+        .o_search_panel.o_search_panel_summary {
+            border: 1px solid lightgray;
+            flex-basis: auto;
+            height: auto;
+            padding: $o-searchpanel-p-small $o-searchpanel-p;
+            width: 100%;
+        }
+    }
+}
+
+.o_web_client .o_search_panel.o_mobile_search > .o_mobile_search_content {
+    .o_search_panel {
+        padding-right: $o-searchpanel-p;
+    }
+
+    .o_search_panel_category_value .o_search_panel_category_value {
+        &:after,
+        &:last-child::after {
+            top: 1.3rem;
+        }
+        &:last-child:before {
+            height: 1.4rem;
+        }
+    }
+
+    .list-group-item,
+    .list-group-item .list-group-item,
+    .o_search_panel_category_value.list-group-item .list-group-item-action {
+        padding-top: $o-searchpanel-p-small;
+        padding-bottom: $o-searchpanel-p-small;
+    }
+
+    .list-group-item > .list-group {
+        padding-left: $o-searchpanel-p-small;
+    }
+
+    .o_search_panel_category_value.list-group-item {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}

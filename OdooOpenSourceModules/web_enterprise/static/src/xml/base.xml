@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<!-- Owl Templates -->
+
+<t t-name="DatabaseExpirationPanel" owl="1">
+    <div role="alert"
+        class="database_expiration_panel alert"
+        t-attf-class="alert-{{state.alertType}}"
+        >
+        <!-- t-translation="off" should be on next a element below -->
+        <a t-if="state.diffDays &gt; 0" href="#" class="oe_instance_hide_panel float-right" t-on-click.prevent="_onHide" aria-label="Dismiss">×</a>
+        <span t-if="state.message === 'register'" class="oe_instance_register">
+            <t t-if="!mailInstalled">You will be able to register your database once you have installed your first app.</t>
+            <t t-else="">
+                <t t-set="delay">
+                    <t t-if="state.diffDays === 30">1 month</t>
+                    <t t-else=""><t t-esc="state.diffDays"/> days</t>
+                </t>
+                <t t-if="state.diffDays &gt; 0">
+                    <t t-if="expirationReason === 'demo'">This demo database will expire in <t t-esc="delay"/>. </t>
+                    <t t-else="">This database will expire in <t t-esc="delay"/>. </t>
+                </t>
+                <t t-if="state.diffDays &lt; 1">This database has expired. </t>
+                <t t-if="warning === 'admin'">
+                    <t t-if="notYetRegistered">
+                        <a class="oe_instance_register_show" href="#" t-on-click.prevent="_onClickRegister">Register your subscription</a>
+                        or
+                        <a class="oe_instance_buy" href="#" t-on-click.prevent="_onBuy">buy a subscription</a>.
+                    </t>
+                    <t t-if="expirationReason === 'renewal'">
+                        <a class="oe_instance_renew" href="#" t-on-click.prevent="_onRenew">Renew your subscription</a>
+                        <a class="check_enterprise_status" href="#"
+                            title="Refresh subscription status"
+                            aria-label="Refresh subscription status"
+                            t-on-click.prevent="_onCheckStatus"
+                            >
+                            <i class="fa fa-refresh"/>
+                        </a>
+                    </t>
+                    <t t-elif="expirationReason === 'upsell'">You have more users or more apps installed than your subscription allows.<br/>
+                        <a class="oe_instance_upsell" href="#" t-on-click.prevent="_onUpsell">Upgrade your subscription</a>
+                        <a class="check_enterprise_status" href="#"
+                            title="Refresh subscription status"
+                            aria-label="Refresh subscription status"
+                            t-on-click.prevent="_onCheckStatus"
+                            >
+                            <i class="fa fa-refresh"/>
+                        </a>
+                    </t>
+                </t>
+                <t t-elif="warning === 'user'">Log in as an administrator to correct the issue.</t>
+            </t>
+        </span>
+        <span t-if="state.message === 'success'" class="oe_instance_register oe_instance_success">Thank you, your registration was successful! Your database is valid until <span><t t-esc="state.validDate"/></span>.</span>
+        <span t-elif="state.message === 'update'" class="oe_instance_register oe_subscription_updated">Your subscription was updated and is valid until <span><t t-esc="state.validDate"/></span>.</span>
+        <span t-elif="state.message === 'error'" class="oe_instance_register oe_instance_error">Something went wrong while registering your database. You can try again or contact <a href="https://www.odoo.com/help" target="_blank">Odoo Support</a>.</span>
+        <span t-elif="state.message === 'link'" class="oe_instance_register oe_database_already_linked">
+            Your subscription is already linked to a database.<br/>
+            To unlink it you can either:<br/>
+            <span>- Login to your Odoo.com dashboard then unlink your previous database: <a t-att-href="state.linkedSubscriptionUrl"> <t t-esc="state.linkedSubscriptionUrl"/></a></span><br/>
+            <span t-if="state.emailLinked" class="oe_contract_email_block">
+                - <a href="#" class="oe_contract_send_mail" t-on-click.prevent="_onSendUnlinkEmail">Click here to send an email</a> to the subscription owner (email: <strong t-esc="state.emailLinked"/>) with the instructions to follow
+                <p t-if="state.emailDelivery === 'ongoing'">Sending the instructions by email ...</p>
+                <p t-elif="state.emailDelivery === 'success'">The instructions to unlink your subscription from the previous database(s) have been sent</p>
+                <p t-elif="state.emailDelivery === 'fail'">Unable to send the instructions by email, please contact the <a href="https://www.odoo.com/help" target="_blank">Odoo Support</a><br/>
+                    Error reason: <t t-esc="state.failReason"/>
+                </p>
+            </span>
+            <span t-else="">- Contact your sales representative to help you to unlink your previous database</span>
+        </span>
+        <form t-if="state.displayRegisterForm" class="oe_instance_register oe_instance_register_form form-inline justify-content-center mt-4" t-transition="vertical-slide">
+            <div class="form-group">
+                <label for="enterprise_code">Subscription Code: </label>
+                <input type="text" class="form-control mx-2" t-ref="input"
+                    placeholder="Paste code here"
+                    title="Your subscription code"
+                />
+            </div>
+            <button class="btn btn-primary" t-on-click.prevent="_onCodeSubmit" ><t t-esc="state.buttonText"/></button>
+        </form>
+    </div>
+</t>
+
+<t t-name="HomeMenu" owl="1">
+    <div class="o_home_menu" t-att-class="{ o_search_hidden: !state.isSearching }">
+        <ExpirationPanel t-if="state.displayExpirationPanel" t-on-hide-expiration-panel.stop="_onHideExpirationPanel"/>
+        <div class="o_menu_search">
+            <span class="fa fa-search o_menu_search_icon" role="img" aria-label="Search" title="Search"/>
+            <input t-ref="input" type="text" placeholder="Search..." class="o_menu_search_input" t-on-input="_onInputSearch"
+                role="combobox"
+                t-att-aria-activedescendant="state.isSearching and (appIndex === null ? 'result_menu_' + menuIndex : 'result_app_' + appIndex)"
+                t-att-aria-expanded="state.isSearching ? 'true' : 'false'"
+                aria-autocomplete="list"
+                aria-haspopup="listbox"
+            />
+        </div>
+        <div class="o_home_menu_scrollable" t-ref="mainContent">
+            <div t-if="displayedApps.length" role="listbox" class="o_apps">
+                <a t-foreach="displayedApps" t-as="app"
+                    t-att-id="'result_app_' + app_index"
+                    role="option"
+                    t-att-aria-selected="appIndex === app_index ? 'true' : 'false'"
+                    class="o_app o_menuitem"
+                    t-att-class="{o_focused: appIndex === app_index}"
+                    t-att-data-menu-xmlid="app.xmlid"
+                    t-att-href="app.href || ('#menu_id='+app.id+'&amp;action_id='+app.action)"
+                    t-key="app.id"
+                    t-on-click.prevent="_onAppClick(app)"
+                    >
+                    <div t-if="app.webIconData" class="o_app_icon"
+                        t-attf-style="background-image: url('{{app.webIconData}}');"
+                    />
+                    <div t-else="" class="o_app_icon"
+                        t-attf-style="background-color: {{app.webIcon.backgroundColor}};"
+                        >
+                        <i t-att-class="app.webIcon.iconClass" t-attf-style="color: {{app.webIcon.color}};"/>
+                    </div>
+                    <div class="o_caption" t-esc="app.label"/>
+                </a>
+            </div>
+            <div t-if="displayedMenuItems.length" role="listbox" class="o_menuitems">
+                <a t-foreach="displayedMenuItems" t-as="menu"
+                    t-att-id="'result_menu_' + menu_index"
+                    role="option"
+                    t-att-aria-selected="menuIndex === menu_index ? 'true' : 'false'"
+                    class="o_menuitem"
+                    t-att-class="{o_focused: menuIndex === menu_index}"
+                    t-att-href="menu.href ? menu.href : ('#menu_id='+menu.id+'&amp;action_id='+menu.action)"
+                    t-key="menu.id"
+                    t-on-click.prevent="_onMenuitemClick(menu)"
+                    >
+                    <span class="o_menuitem_parents"><t t-esc="menu.parents"/> / </span>
+                    <t t-esc="menu.label"/>
+                </a>
+            </div>
+            <div t-elif="!displayedApps.length" id="result_menu_0" role="option" aria-selected="true" class="o_no_result">
+                No result
+            </div>
+        </div>
+    </div>
+</t>
+
+<t t-name="HomeMenuWrapper" owl="1">
+    <HomeMenu apps="state.apps" menuItems="state.menuItems" t-att-style="state.style"/>
+</t>
+
+<!-- Legacy Templates -->
+
+<header t-name="Menu">
+    <nav class="o_main_navbar">
+        <a href="#" class="fa fa-th o_menu_toggle" title="Applications" aria-label="Applications" accesskey="h"/>
+        <button type="button" class="fa fa-bars float-right d-block d-md-none o_mobile_menu_toggle" title="Toggle menu" aria-label="Toggle menu"/>
+
+        <a href="#" class="o_menu_brand" role="button" />
+        <ul class="o_menu_sections" role="menu"/>
+        <ul class="o_menu_systray" role="menu"/>
+    </nav>
+</header>
+
+<t t-name="Menu.link">
+    <t t-set="depth" t-value="(depth || 0) + 1"/>
+
+    <t t-if="!menu.children.length">
+        <t t-set="_link">
+            <a role="menuitem" t-attf-href="#menu_id=#{menu.id}&amp;action=#{menu.action ? menu.action.split(',')[1] : ''}"
+                t-att-data-menu="menu.id"
+                t-att-data-action-model="menu.action ? menu.action.split(',')[0] : ''"
+                t-att-data-action-id="menu.action ? menu.action.split(',')[1] : ''"
+                t-att-data-menu-xmlid="menu.xmlid"
+                t-attf-class="#{inNavbar ? '' : 'dropdown-item '}o_menu_entry_lvl_#{depth}"
+                data-toggle="collapse" data-target="#o_navbar_collapse.in">
+                <span><t t-esc="menu.name"/></span>
+            </a>
+        </t>
+        <li t-if="inNavbar">
+            <t t-raw="_link"/>
+        </li>
+        <t t-else="">
+            <t t-raw="_link"/>
+        </t>
+    </t>
+    <t t-else="">
+        <!-- Desktop case -->
+        <t t-if="!mobile">
+            <div t-attf-class="dropdown-header o_menu_header_lvl_#{depth}">
+                <span><t t-esc="menu.name"/></span>
+            </div>
+            <t t-foreach="menu.children" t-as="menu">
+                <t t-call="Menu.link"/>
+            </t>
+        </t>
+        <!-- Mobile case -->
+        <li t-else="" class="o_burger_menu_section">
+            <a href="#" t-attf-class="o_menu_entry_lvl_#{depth}" t-att-data-menu-xmlid="menu.xmlid" data-toggle="dropdown" role="button" aria-expanded="false">
+                <t t-esc="menu.name"/>
+                <span class="fa fa-chevron-right toggle_icon float-right"/>
+            </a>
+            <ul>
+                <t t-foreach="menu.children" t-as="menu">
+                    <t t-call="Menu.link"/>
+                </t>
+            </ul>
+        </li>
+    </t>
+</t>
+
+<!-- separate first level dropdown from the others to avoid nested dropdown -->
+<t t-name="Menu.sections">
+    <t t-foreach="menu_data.children" t-as="first_level_menu">
+        <section t-att-class="first_level_menu.id">
+            <t t-foreach="first_level_menu.children" t-as="second_level_menu">
+                <t t-if="!second_level_menu.children.length">
+                    <t t-call="Menu.link">
+                        <t t-set="inNavbar" t-value="true"/>
+                        <t t-set="menu" t-value="second_level_menu"/>
+                    </t>
+                </t>
+                <t t-else="">
+                    <li>
+                        <a href="#" class="dropdown-toggle o-no-caret o_menu_header_lvl_1" t-att-data-menu-xmlid="second_level_menu.xmlid" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <t t-esc="second_level_menu.name"/>
+                        </a>
+                        <div class="dropdown-menu" role="menu">
+                            <t t-foreach="second_level_menu.children" t-as="third_level_menu">
+                                <t t-call="Menu.link">
+                                    <t t-set="depth" t-value="1"/>
+                                    <t t-set="menu" t-value="third_level_menu"/>
+                                </t>
+                            </t>
+                        </div>
+                    </li>
+                </t>
+            </t>
+        </section>
+    </t>
+</t>
+
+<t t-extend="res_config_edition">
+    <t t-jquery=".user-heading h3" t-operation="replace">
+        <h3>
+            Odoo <t t-esc="widget.server_version"/> (Enterprise Edition)
+        </h3>
+    </t>
+    <t t-jquery="#license" t-operation="replace">
+        <a id="license" target="_blank" href="https://github.com/odoo/enterprise/blob/13.0/LICENSE" style="text-decoration: underline;">Odoo Enterprise Edition License V1.0</a>
+    </t>
+    <t t-jquery=".user-heading h3" t-operation="after">
+        <t t-set="expiration_date" t-value="widget.expiration_date ? moment(widget.expiration_date).format('LL') : null"/>
+        <t t-if="expiration_date">
+            <h5>Database expiration: <t t-esc="expiration_date"/></h5>
+        </t>
+    </t>
+</t>
+
+<t t-extend="UserMenu.shortcuts">
+    <t t-jquery="tr:last" t-operation="after">
+        <tr>
+            <td align="left">Toggle home menu</td>
+            <td>
+                <span class="o_key">Alt</span> + <span class="o_key">h</span>
+            </td>
+            <td>
+                <span class="o_key">Control</span> + <span class="o_key">Alt</span> + <span class="o_key">h</span>
+            </td>
+        </tr>
+    </t>
+</t>
+
+</templates>
