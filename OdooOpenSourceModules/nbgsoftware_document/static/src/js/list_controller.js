@@ -1,4 +1,4 @@
-odoo.define('usmh_document.ListController', function (require) {
+odoo.define('nbgsoftware_document.ListController', function (require) {
     "use strict";
 
     const ListController = require('web.ListController');

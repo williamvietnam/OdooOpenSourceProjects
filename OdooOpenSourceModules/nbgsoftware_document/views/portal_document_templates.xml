@@ -29,7 +29,7 @@
             <ul t-if="c.document_child_ids" class="nav custom-nav nav-pills flex-column nav-hierarchy">
                 <t t-foreach="c.document_child_ids" t-as="c">
                     <t t-if="c.check_has_document()">
-                        <t t-call="usmh_document.categories_recursive"/>
+                        <t t-call="nbgsoftware_document.categories_recursive"/>
                     </t>
                 </t>
             </ul>
@@ -52,7 +52,7 @@
                                 </a>
                             </li>
                             <t t-foreach="categories" t-as="c">
-                                <t t-call="usmh_document.categories_recursive"/>
+                                <t t-call="nbgsoftware_document.categories_recursive"/>
                             </t>
                         </ul>
                     </div>

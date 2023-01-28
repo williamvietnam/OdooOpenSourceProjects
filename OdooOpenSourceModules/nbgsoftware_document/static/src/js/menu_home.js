@@ -1,4 +1,4 @@
-odoo.define('usmh_document.HomeView', function (require) {
+odoo.define('nbgsoftware_document.HomeView', function (require) {
 'use strict';
 var core = require('web.core');
 var ajax = require('web.ajax');

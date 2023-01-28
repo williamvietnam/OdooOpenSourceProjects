@@ -1,8 +1,8 @@
-odoo.define('usmh_document.DocumentKanbanRenderer', function (require) {
+odoo.define('nbgsoftware_document.DocumentKanbanRenderer', function (require) {
 "use strict";
 
 const KanbanRenderer = require('web.KanbanRenderer');
-const DocumentKanbanRecord = require('usmh_document.DocumentKanbanRecord');
+const DocumentKanbanRecord = require('nbgsoftware_document.DocumentKanbanRecord');
 
 const DocumentKanbanRenderer = KanbanRenderer.extend({
     config: Object.assign({}, KanbanRenderer.prototype.config, {

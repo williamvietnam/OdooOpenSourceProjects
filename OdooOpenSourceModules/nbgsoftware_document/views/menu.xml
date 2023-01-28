@@ -29,7 +29,7 @@
 
     <menuitem id="menu_document_document"
               name="Documents"
-              parent="usmh_app_link.menu_usmh_root"
+              parent="nbgsoftware_application.menu_nbgsoftware_root"
               sequence="4"/>
     <menuitem id="menu_my_document_document"
               name="My Documents"
@@ -44,7 +44,7 @@
 
     <menuitem id="menu_document_workspace"
               name="Workspaces"
-              parent="usmh_app_link.menu_usmh_applink_config"
+              parent="nbgsoftware_application.menu_nbgsoftware_application_config"
               action="action_document_workspace"
               groups="base.group_user"
               sequence="2"/>
