@@ -36,7 +36,7 @@ class CustomerPortal(CustomerPortal):
             'default_url': '/my/document',
             'base_url': http.request.env["ir.config_parameter"].sudo().get_param("web.base.url"),
         })
-        return request.render("usmh_document.website_portal_my_document", values)
+        return request.render("nbgsoftware_document.website_portal_my_document", values)
 
     def sitemap_document(env, rule, qs):
         if not qs or qs.lower() in '/document':
@@ -100,4 +100,4 @@ class CustomerPortal(CustomerPortal):
             'categories': valid_categs,
             'keep': keep,
         }
-        return request.render("usmh_document.website_portal_my_document", values)
+        return request.render("nbgsoftware_document.website_portal_my_document", values)

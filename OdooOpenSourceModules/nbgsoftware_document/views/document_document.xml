@@ -67,7 +67,7 @@
         <field name="name">document.document.view.kanban</field>
         <field name="model">document.document</field>
         <field name="arch" type="xml">
-            <kanban js_class="usmh_document_kanban">
+            <kanban js_class="nbgsoftware_document_kanban">
                 <field name="id" attrs="{'invisible': True}"/>
                 <field name="name" invisible="1"/>
                 <field name="file_data" widget="binary" filename="name"/>

@@ -49,7 +49,7 @@
                         <group>
                             <field name="document_ids" widget="many2many_tags" options="{'no_create': True}"
                                    domain="[('folder_id', '=', False)]"
-                                   kanban_view_ref="%(usmh_document.view_document_document_kanban)s"/>
+                                   kanban_view_ref="%(nbgsoftware_document.view_document_document_kanban)s"/>
                         </group>
                     </group>
                     <notebook>

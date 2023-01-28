@@ -40,6 +40,6 @@ class UiApp(models.Model):
 
     @api.model
     def get_home_action(self):
-        action_id = self.env.ref('usmh_app_link.action_all_app', raise_if_not_found=False)
+        action_id = self.env.ref('nbgsoftware_application.action_all_app', raise_if_not_found=False)
         url = 'web#action=%s&model=ui.app&view_type=kanban&cids=1' % (action_id.id)
         return url

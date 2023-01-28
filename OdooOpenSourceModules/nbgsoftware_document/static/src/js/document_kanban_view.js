@@ -1,8 +1,8 @@
-odoo.define('usmh_document.DocumentKanbanView', function (require) {
+odoo.define('nbgsoftware_document.DocumentKanbanView', function (require) {
 "use strict";
 
 const KanbanView = require('web.KanbanView');
-const DocumentKanbanRenderer = require('usmh_document.DocumentKanbanRenderer');
+const DocumentKanbanRenderer = require('nbgsoftware_document.DocumentKanbanRenderer');
 const viewRegistry = require('web.view_registry');
 
 const DocumentKanbanView = KanbanView.extend({
@@ -11,7 +11,7 @@ const DocumentKanbanView = KanbanView.extend({
     }),
 });
 
-viewRegistry.add('usmh_document_kanban', DocumentKanbanView);
+viewRegistry.add('nbgsoftware_document_kanban', DocumentKanbanView);
 
 return DocumentKanbanView;
 

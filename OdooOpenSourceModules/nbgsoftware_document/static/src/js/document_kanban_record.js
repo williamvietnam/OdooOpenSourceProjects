@@ -1,4 +1,4 @@
-odoo.define('usmh_document.DocumentKanbanRecord', function (require) {
+odoo.define('nbgsoftware_document.DocumentKanbanRecord', function (require) {
 "use strict";
 
     var KanbanRecord = require('web.KanbanRecord');

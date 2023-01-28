@@ -3,7 +3,7 @@
     <record id="view_ui_app_form" model="ir.ui.view">
         <field name="name">view_ui_app_form</field>
         <field name="model">ui.app</field>
-        <field name="inherit_id" ref="usmh_app_link.ui_app_view_form"/>
+        <field name="inherit_id" ref="nbgsoftware_application.ui_app_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='category_id']" position="after">
                 <label for="down_document" string="Document Url" id="label_document"
@@ -26,10 +26,10 @@
     <record id="view_ui_app_kanban_custom" model="ir.ui.view">
         <field name="name">view_ui_app_custom_kanban</field>
         <field name="model">ui.app</field>
-        <field name="inherit_id" ref="usmh_app_link.ui_app_view_kanban_custom"/>
+        <field name="inherit_id" ref="nbgsoftware_application.ui_app_view_kanban_custom"/>
         <field name="arch" type="xml">
             <xpath expr="//kanban" position="replace">
-                <kanban class="background-app-item" js_class="usmh_document_kanban" default_order="name">
+                <kanban class="background-app-item" js_class="nbgsoftware_document_kanban" default_order="name">
                     <field name="id" attrs="{'invisible': True}"/>
                     <field name="name"/>
                     <field name="url"/>
@@ -84,10 +84,10 @@
     <record id="view_ui_app_kanban_home" model="ir.ui.view">
         <field name="name">view_ui_app_home_kanban</field>
         <field name="model">ui.app</field>
-        <field name="inherit_id" ref="usmh_app_link.ui_app_home_view_kanban"/>
+        <field name="inherit_id" ref="nbgsoftware_application.ui_app_home_view_kanban"/>
         <field name="arch" type="xml">
             <xpath expr="//kanban" position="replace">
-                <kanban class="o_modules_kanban background-app-item" js_class="usmh_document_kanban" create="false"
+                <kanban class="o_modules_kanban background-app-item" js_class="nbgsoftware_document_kanban" create="false"
                         default_order="name">
                     <field name="id" attrs="{'invisible': True}"/>
                     <field name="name"/>

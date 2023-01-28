@@ -5,7 +5,7 @@
             <link rel='stylesheet' type="text/scss" href='/nbgsoftware_document/static/src/css/website_portal_document.css'/>
         </xpath>
     </template>
-    <template id="assets_backend" name="usmh_document_backend" inherit_id="web.assets_backend">
+    <template id="assets_backend" name="nbgsoftware_document_backend" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
             <link rel="stylesheet" type="text/scss" href="/nbgsoftware_document/static/src/css/kanban.css"/>
             <link rel="stylesheet" type="text/scss" href="/nbgsoftware_document/static/src/css/mobile_menu_top.css"/>
