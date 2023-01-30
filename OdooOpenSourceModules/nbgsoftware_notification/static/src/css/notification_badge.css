@@ -1,0 +1,27 @@
+.o_NotificationBadge_counter {
+    background-color: darkred;
+    position: relative;
+    transform: translate(-13px, -12px);
+    margin-right: -10px;
+    font-size: 9px;
+}
+.ellipsis-text > p{
+    max-width: 40rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+}
+.ellipsis-text > p:nth-child(n + 2) {
+    display: none !important;
+ }
+.ellipsis-text > p:first-child {
+    max-width: 40rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    white-space: pre-wrap !important;
+}
