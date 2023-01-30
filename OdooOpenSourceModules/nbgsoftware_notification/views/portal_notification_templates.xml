@@ -1,0 +1,174 @@
+<odoo>
+    <template id="portal_notification_layout" name="Notification" inherit_id="portal.frontend_layout" priority="10">
+        <xpath expr="//ul[@id='top_menu']" position="before">
+            <a class="o_notification_badge" style="cursor: pointer"
+               aria-label="Notification Badge" accesskey="h" href="/notifications">
+                <i role="img" aria-label="Notifications" class="fa fa-bell" style="font-size: 22px"/>
+                <t t-set="count" t-value="notification_count"/>
+                <span class="o_NotificationBadge_counter badge badge-pill"
+                      t-esc="count"
+                      style="background-color: red; font-size: 9px; position: relative; color: white; transform: translate(-16px, -12px);"/>
+            </a>
+        </xpath>
+    </template>
+
+    <template id="website_portal_my_notification" name="My Notifications">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Your Notifications</t>
+            </t>
+            <div class="container custom_container portal-notification-container">
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="personal">
+                        <t t-if="not notifications">
+                            <p>No notification.</p>
+                        </t>
+                        <t t-if="notifications">
+                            <style>
+                                table.order-table tr th{
+                                width: auto !important;
+                                }
+                                table.order-table td {
+                                vertical-align: inherit;
+                                }
+                            </style>
+
+                            <div style="">
+                                <h2 style="display: inline-block;">Notifications</h2>
+                                <div class="portal-notification-action-menu-container">
+                                    <div class="portal-notification-action-menu-wrapper">
+                                        <div class="portal-notification-action-menu">
+                                            <i class="fa fa-cog"/>
+                                            <span style="margin-right:6px">Action</span>
+                                        </div>
+
+                                        <div id="portal-notification-popup-action-menu">
+                                            <div id="portal-notification-read-item" class="portal-notification-item">
+                                                Read
+                                            </div>
+                                            <div id="portal-notification-unread-item" class="portal-notification-item">
+                                                Unread
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="text" id="portalNotificationSearch"
+                                   class="portalNotificationInputSearch fa fa-search"
+                                   placeholder="タイトルを検索する.." title="Type in a name"/>
+
+                            <table id="portalNotificationTable"
+                                   class="table order-table table-striped table-hover o_my_status_table col-md-12"
+                                   width="100%">
+                                <thead>
+                                    <tr class="active">
+                                        <th style="width=1px; height=1px">
+                                            <input type="checkbox" class="portal-notification-checkbox-all"/>
+                                            <span style="color:transparent;">ID</span>
+                                        </th>
+                                        <th class="portal-notification-title" style="cursor: pointer;">
+                                            <div style="display: inline-block; padding: 8px;">Title</div>
+                                            <i class="fa fa-sort-down"/>
+                                        </th>
+                                        <th class="portal-notification-content" style="cursor: pointer;">
+                                            <div style="display: inline-block; padding: 8px;">Summary Content</div>
+                                            <i class="fa fa-sort-down"/>
+                                        </th>
+                                        <th class="portal-notification-date" style="cursor: pointer;">
+                                            <div style="display: inline-block; padding: 8px;">Create at</div>
+                                            <i class="fa fa-sort-down"/>
+                                        </th>
+                                        <th class="portal-notification-author" style="cursor: pointer;">
+                                            <div style="display: inline-block; padding: 8px;">Create by</div>
+                                            <i class="fa fa-sort-down"/>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <t t-foreach="notifications" t-as="notification">
+                                    <t t-if="is_read_notifications_list">
+                                        <t t-if='is_read_notifications_list[notification.id]'>
+                                            <tr class="row-notification">
+                                                <td style="width=1px; height=1px">
+                                                    <input type="checkbox" class="portal-notification-checkbox"/>
+                                                    <span style="color:transparent" t-field="notification.id"/>
+                                                </td>
+                                                <td class="cell_overflow">
+                                                    <span t-field="notification.title"/>
+                                                </td>
+                                                <td>
+                                                    <span class="portal-notification-content"
+                                                          t-field="notification.content"/>
+                                                </td>
+                                                <td>
+                                                    <span id="portal_notification_date"
+                                                          t-field="notification.create_notification_date_time"/>
+                                                </td>
+                                                <td>
+                                                    <span id="portal_notification_author"
+                                                          t-field="notification.create_uid"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-else="">
+                                            <tr class="row-notification"
+                                                style="background: rgba(35,35,35,0.25); color:black">
+                                                <td style="width=1px; height=1px">
+                                                    <input type="checkbox" class="portal-notification-checkbox"/>
+                                                    <span style="color:transparent" t-field="notification.id"/>
+                                                </td>
+                                                <td class="cell_overflow">
+                                                    <span t-field="notification.title"/>
+                                                </td>
+                                                <td>
+                                                    <span class="portal-notification-content"
+                                                          t-field="notification.content"/>
+                                                </td>
+                                                <td>
+                                                    <span id="portal_notification_date"
+                                                          t-field="notification.create_notification_date_time"/>
+                                                </td>
+                                                <td>
+                                                    <span id="portal_notification_author"
+                                                          t-field="notification.create_uid"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <t t-else="">
+                                        <tr class="row-notification"
+                                            style="background: rgba(35,35,35,0.25); color:black">
+                                            <td style="width=1px; height=1px">
+                                                <input type="checkbox" class="portal-notification-checkbox"/>
+                                                <span style="color:transparent" t-field="notification.id"/>
+                                            </td>
+                                            <td class="cell_overflow">
+                                                <span t-field="notification.title"/>
+                                            </td>
+                                            <td>
+                                                <span class="portal-notification-content"
+                                                      t-field="notification.content"/>
+                                            </td>
+                                            <td>
+                                                <span id="portal_notification_date"
+                                                      t-field="notification.create_notification_date_time"/>
+                                            </td>
+                                            <td>
+                                                <span id="portal_notification_author"
+                                                      t-field="notification.create_uid"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </table>
+                            <div t-if="pager" class="o_portal_pager text-center">
+                                <t t-call="website.pager"/>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

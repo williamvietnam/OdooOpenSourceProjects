@@ -1,4 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <!--This action called from model (when clicked notification button)-->
+    <record id="action_notification_public" model="ir.actions.act_window">
+        <field name="name">Notifications Public</field>
+        <field name="res_model">notification.notification.public</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="view_notification_notification_public_filter"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
 
+    <!--This action called when click menuitem Notifications-->
+    <record id="action_notification" model="ir.actions.act_window">
+        <field name="name">Notifications</field>
+        <field name="res_model">notification.notification</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_notification_notification_filter"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <!--This action to navigate to Tags manage screen-->
+    <record id="action_notification_tag" model="ir.actions.act_window">
+        <field name="name">Tags</field>
+        <field name="res_model">notification.tag</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_group_by_tag': 1}</field>
+    </record>
+
+    <menuitem id="menu_notification"
+              name="Notifications"
+              parent="nbgsoftware_application.menu_nbgsoftware_root"
+              action="action_notification"
+              groups="base.group_system"
+              sequence="6"/>
+
+    <menuitem id="menu_notification_tag"
+              name="Tags"
+              parent="nbgsoftware_application.menu_nbgsoftware_application_config"
+              action="action_notification_tag"
+              groups="base.group_system"
+              sequence="3"/>
 </odoo>

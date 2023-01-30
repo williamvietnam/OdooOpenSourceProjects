@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template>
+    <template id="assets_backend" name="nbgsoftware_notification_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/nbgsoftware_notification_backend/static/src/js/list_controller.js"/>
+            <script type="text/javascript" src="/nbgsoftware_notification_backend/static/src/js/notification_tree_record.js"/>
+            <script type="text/javascript" src="/nbgsoftware_notification_backend/static/src/js/notification_badge.js"/>
+            <link rel="stylesheet" type="text/scss" href="/nbgsoftware_notification_backend/static/src/css/notification_badge.css"/>
+        </xpath>
+    </template>
 
+    <template id="assets_frontend" name="nbgsoftware_notification_backend_frontend" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/scss" href="/nbgsoftware_notification_backend/static/src/css/portal_notification_tree_record.css"/>
+            <script type="text/javascript" src="/nbgsoftware_notification_backend/static/src/js/portal_notification_tree_record.js"/>
+        </xpath>
     </template>
 </odoo>

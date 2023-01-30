@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_notification_notification_filter" model="ir.ui.view">
+        <field name="name">view.notification.notification.filter</field>
+        <field name="model">notification.notification</field>
+        <field name="arch" type="xml">
+            <search string="Search notifications">
+                <field name="name"/>
+                <searchpanel>
+                    <field name="tag_ids" string="Tags" enable_counters="1" select="multi"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="notification_notification_view_tree" model="ir.ui.view">
+        <field name="name">notification.notification.view.tree</field>
+        <field name="model">notification.notification</field>
+        <field name="arch" type="xml">
+            <tree export_xlsx="0">
+                <field name="notification_important" widget="image" nolabel="1" readonly="1" width="15"/>
+                <field name="title" optional="show" width="25"/>
+                <field class="ellipsis-text" name="content" optional="show" width="30"/>
+                <field name="user_ids" optional="hide" widget="many2many_tags" width="15"/>
+                <field name="create_notification_date_time" optional="show" width="15"/>
+                <field name="create_uid" optional="show" width="15"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="notification_notification_view_form" model="ir.ui.view">
+        <field name="name">notification.notification.view.form</field>
+        <field name="model">notification.notification</field>
+        <field name="arch" type="xml">
+            <form duplicate="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+
+                        <group>
+                            <field name="tag_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <group>
+                                <field name="is_public"/>
+                            </group>
+                            <field name="user_ids" attrs="{'invisible': [('is_public', '=', True)]}"
+                                   options="{'no_create': True}"
+                                   widget="many2many_tags_avatar" placeholder="Select users..." class="oe_inline"/>
+                        </group>
+                        <group>
+                            <field name="is_notification_important"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Summary Content" name="content">
+                            <field name="content" widget="html"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
