@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_notification_notification_public_filter" model="ir.ui.view">
+        <field name="name">view.notification.notification.public.filter</field>
+        <field name="model">notification.notification.public</field>
+        <field name="arch" type="xml">
+            <search string="Search notifications">
+                <field name="name"/>
+                <searchpanel>
+                    <field name="tag_ids" string="Tags" enable_counters="1" select="multi" icon="far fa-tags"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="notification_notification_public_view_tree" model="ir.ui.view">
+        <field name="name">notification.notification.public.view.tree</field>
+        <field name="model">notification.notification.public</field>
+        <field name="arch" type="xml">
+            <tree js_class="notification_tree_record" export_xlsx="0" default_order="name" create="false"
+                  delete="false">
+                <field name="notification_important" widget="image" nolabel="1" readonly="1" width="15"/>
+                <field name="name" invisible="1" width="25"/>
+                <field name="title" optional="show" width="25"/>
+                <field class="ellipsis-text" name="content" optional="show" width="30"/>
+                <field name="create_notification_date_time" optional="show" width="15"/>
+                <field name="create_uid" optional="show" width="15"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="notification_notification_public_view_form" model="ir.ui.view">
+        <field name="name">notification.notification.public.view.form</field>
+        <field name="model">notification.notification.public</field>
+        <field name="arch" type="xml">
+            <form duplicate="false" create="false" edit="false" delete="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="tag_ids"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="is_public"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Summary Content" name="content">
+                            <field name="content" widget="html"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
