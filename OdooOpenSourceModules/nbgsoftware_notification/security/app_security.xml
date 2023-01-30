@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.rule" id="notification_rule_user">
+            <field name="name">Notification Rule User</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="model_id" ref="nbgsoftware_notification.model_notification_notification_public"/>
+            <field name="domain_force">[('user_ids', '=', user.id)]</field>
+        </record>
+
+        <record model="ir.rule" id="notification_rule_admin">
+            <field name="name">Notification Rule Admin</field>
+            <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+            <field name="model_id" ref="nbgsoftware_notification.model_notification_notification_public"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+    </data>
+</odoo>
