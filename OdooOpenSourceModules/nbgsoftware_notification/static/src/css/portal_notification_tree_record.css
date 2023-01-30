@@ -1,0 +1,92 @@
+.portal-notification-action-menu-container{
+   display: none;
+   width:80%;
+}
+
+.portal-notification-action-menu-wrapper{
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+
+.portal-notification-action-menu{
+    width:88px;
+    text-align: center;
+    margin-bottom:8px;
+    cursor:pointer;
+}
+
+.portal-notification-action-menu:hover{
+    border-style: outset;
+}
+
+#portal-notification-popup-action-menu{
+   -ms-user-select: none;
+   user-select: none;
+   display:none;
+   margin-top: 24px;
+   margin-left: 24px;
+   z-index: 100;
+   background-color: #fff;
+   color: #1f194c;
+   width: 8em;
+   padding: 0.5em 0.4em;
+   font-size: 13px;
+   position:fixed;
+   border-radius: 6px;
+}
+
+.portal-notification-item{
+     user-select: none;
+     padding: 0.3em 1.2em;
+}
+
+.portal-notification-item:hover{
+     user-select: none;
+     background-color: rgba(44,141,247,0.2);
+     cursor:pointer;
+}
+
+.portalNotificationInputSearch{
+   box-sizing: border-box;
+   background-position: 10px 10px;
+   background-repeat: no-repeat;
+   width: 100%;
+   font-size: 16px;
+   padding: 12px 20px 12px 40px;
+   border: 1px solid #ddd;
+   margin-bottom: 12px;
+   background-size:16px;
+   background-image: url("../../description/icon_search.png");
+}
+
+.portal-notification-content{
+    max-width: 20rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+}
+
+.portal-notification-content > p{
+    max-width: 20rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+}
+
+.portal-notification-content > p:nth-child(n + 2) {
+    display: none !important;
+ }
+.portal-notification-content > p:first-child {
+    max-width: 20rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    white-space: pre-wrap !important;
+}
