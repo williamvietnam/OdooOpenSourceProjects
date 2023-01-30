@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-extend="Menu">
+        <t t-jquery=".o_menu_sections" t-operation="after">
+            <t t-set="is_show" t-value="widget._is_show_notification_badge"/>
+            <t t-if="is_show">
+                <a class="o_notification_badge" style="cursor: pointer"
+                   autofocus="autofocus" aria-label="Notification Badge"
+                   accesskey="h">
+                    <i role="img" aria-label="Notifications" class="fa fa-bell"/>
+                    <t>
+                        <span class="o_NotificationBadge_counter badge badge-pill"/>
+                    </t>
+                </a>
+            </t>
+        </t>
+    </t>
+</templates>
