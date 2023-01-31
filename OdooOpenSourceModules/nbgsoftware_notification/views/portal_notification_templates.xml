@@ -38,17 +38,21 @@
                                 <h2 style="display: inline-block;">Notifications</h2>
                                 <div class="portal-notification-action-menu-container">
                                     <div class="portal-notification-action-menu-wrapper">
-                                        <div class="portal-notification-action-menu">
-                                            <i class="fa fa-cog"/>
-                                            <span style="margin-right:6px">Action</span>
-                                        </div>
-
-                                        <div id="portal-notification-popup-action-menu">
-                                            <div id="portal-notification-read-item" class="portal-notification-item">
-                                                Read
+                                        <div class="portal-notification-dropdown">
+                                            <div class="portal-notification-action-menu">
+                                                <i class="fa fa-cog"/>
+                                                <span style="margin-right:6px">Action</span>
                                             </div>
-                                            <div id="portal-notification-unread-item" class="portal-notification-item">
-                                                Unread
+
+                                            <div id="portal-notification-popup-action-menu" class="notification-dropdown-content">
+                                                <div id="portal-notification-read-item"
+                                                     class="portal-notification-item">
+                                                    Read
+                                                </div>
+                                                <div id="portal-notification-unread-item"
+                                                     class="portal-notification-item">
+                                                    Unread
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -84,6 +88,9 @@
                                             <div style="display: inline-block; padding: 8px;">Create by</div>
                                             <i class="fa fa-sort-down"/>
                                         </th>
+                                        <th>
+                                            <div style="display: inline-block; padding: 8px;">Tags</div>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <t t-foreach="notifications" t-as="notification">
@@ -109,6 +116,10 @@
                                                     <span id="portal_notification_author"
                                                           t-field="notification.create_uid"/>
                                                 </td>
+                                                <td>
+                                                    <span class="portal_notification_tag_ids"
+                                                          t-field="notification.tag_ids"/>
+                                                </td>
                                             </tr>
                                         </t>
                                         <t t-else="">
@@ -132,6 +143,10 @@
                                                 <td>
                                                     <span id="portal_notification_author"
                                                           t-field="notification.create_uid"/>
+                                                </td>
+                                                <td>
+                                                    <span class="portal_notification_tag_ids"
+                                                          t-field="notification.tag_ids"/>
                                                 </td>
                                             </tr>
                                         </t>
@@ -157,6 +172,10 @@
                                             <td>
                                                 <span id="portal_notification_author"
                                                       t-field="notification.create_uid"/>
+                                            </td>
+                                            <td>
+                                                <span class="portal_notification_tag_ids"
+                                                      t-field="notification.tag_ids"/>
                                             </td>
                                         </tr>
                                     </t>

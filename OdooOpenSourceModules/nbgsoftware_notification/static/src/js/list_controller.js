@@ -41,22 +41,22 @@ odoo.define('nbgsoftware_notification.ListController', function (require) {
 
         _onReadNotifications(){
            rpc.query({
-             model:'notification.notification.public',
-             method:'update_list_read_notification',
-             args:[this.getSelectedIds()]
-           })
-
-           location.reload();
+              model:'notification.notification.public',
+              method:'update_list_read_notification',
+              args:[this.getSelectedIds()]
+           }).then(function(){
+              location.reload();
+           });
        },
 
         _onUnreadNotifications(){
            rpc.query({
-             model:'notification.notification.public',
-             method:'delete_list_unread_notification',
-             args:[this.getSelectedIds()]
+              model:'notification.notification.public',
+              method:'delete_list_unread_notification',
+              args:[this.getSelectedIds()]
+           }).then(function(){
+              location.reload();
            })
-
-           location.reload();
         },
 
         _updateSelectionBox() {
