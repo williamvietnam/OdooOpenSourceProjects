@@ -5,6 +5,10 @@ var publicWidget = require('web.public.widget');
 var PortalSidebar = require('portal.PortalSidebar');
 var rpc = require('web.rpc');
 
+var isTitleSortClicked = false;
+var isContentSortClicked = false;
+var isDateSortClicked = false;
+
 publicWidget.registry.app_action  = PortalSidebar.extend({
     selector: '.portal-notification-container',
     events: {
@@ -14,7 +18,6 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
         'click .portal-notification-date': '_onPortalNotificationDateSort',
         'click .portal-notification-author': '_onPortalNotificationAuthorSort',
         'keyup .portalNotificationInputSearch': '_onPortalNotificationInputSearch',
-        'click .portal-notification-action-menu': '_onPortalNotificationActionMenuButton',
         'click .portal-notification-checkbox-all': '_onCheckboxAllClicked',
         'click .portal-notification-checkbox': '_onCheckboxClicked',
         'click #portal-notification-read-item': '_onPortalNotificationReadClicked',
@@ -23,11 +26,11 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
 
     start: function () {
         var def = this._super.apply(this, arguments);
-        const menuItemDialog = document.getElementById("portal-notification-popup-action-menu");
-        window.onclick = function(event) {
-           if (event.target == menuItemDialog) {
-               menuItemDialog.style.display = "none";
-           }
+        const tagsElementsClasses = document.getElementsByClassName("portal_notification_tag_ids");
+        for(let i = 0; i < tagsElementsClasses.length; i++){
+             let tagsElementString = tagsElementsClasses[i].innerText;
+             let tagsArray = tagsElementString.split(",");
+             console.log(tagsArray);
         }
         return def;
     },
@@ -77,24 +80,49 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
     _onPortalNotificationTitleSort: function(event){
         let table, rows, switching, i, x, y, shouldSwitch;
         table = document.getElementById("portalNotificationTable");
-        switching = true;
-        while (switching) {
-          switching = false;
-          rows = table.rows;
+        if(!isTitleSortClicked){
+          isTitleSortClicked = true;
+          switching = true;
+          while (switching) {
+            switching = false;
+            rows = table.rows;
 
-           for (i = 1; i < (rows.length - 1); i++) {
-              shouldSwitch = false;
-              x = rows[i].getElementsByTagName("td")[1];
-              y = rows[i + 1].getElementsByTagName("td")[1];
+             for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("td")[1];
+                y = rows[i + 1].getElementsByTagName("td")[1];
 
-              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                  shouldSwitch = true;
-                  break;
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+             }
+             if (shouldSwitch) {
+                 rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                 switching = true;
+             }
+          }
+        }else{
+           isTitleSortClicked = false;
+           switching = true;
+           while (switching) {
+              switching = false;
+              rows = table.rows;
+
+              for (i = 1; i < (rows.length - 1); i++) {
+                 shouldSwitch = false;
+                 x = rows[i].getElementsByTagName("td")[0];
+                 y = rows[i + 1].getElementsByTagName("td")[0];
+
+                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                     shouldSwitch = true;
+                     break;
+                 }
               }
-           }
-           if (shouldSwitch) {
-               rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-               switching = true;
+              if (shouldSwitch) {
+                  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                  switching = true;
+              }
            }
         }
     },
@@ -103,25 +131,50 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
     _onPortalNotificationContentSort: function(event){
         let table, rows, switching, i, x, y, shouldSwitch;
         table = document.getElementById("portalNotificationTable");
-        switching = true;
-        while (switching) {
-          switching = false;
-          rows = table.rows;
+        if(!isContentSortClicked){
+           isContentSortClicked = true;
+           switching = true;
+           while (switching) {
+             switching = false;
+             rows = table.rows;
 
-           for (i = 1; i < (rows.length - 1); i++) {
-              shouldSwitch = false;
-              x = rows[i].getElementsByTagName("td")[2];
-              y = rows[i + 1].getElementsByTagName("td")[2];
+              for (i = 1; i < (rows.length - 1); i++) {
+                 shouldSwitch = false;
+                 x = rows[i].getElementsByTagName("td")[2];
+                 y = rows[i + 1].getElementsByTagName("td")[2];
 
-              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                  shouldSwitch = true;
-                  break;
+                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                     shouldSwitch = true;
+                     break;
+                 }
+              }
+              if (shouldSwitch) {
+                  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                  switching = true;
               }
            }
-           if (shouldSwitch) {
-               rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-               switching = true;
-           }
+        }else{
+            isContentSortClicked = false;
+            switching = true;
+            while (switching) {
+               switching = false;
+               rows = table.rows;
+
+               for (i = 1; i < (rows.length - 1); i++) {
+                  shouldSwitch = false;
+                  x = rows[i].getElementsByTagName("td")[0];
+                  y = rows[i + 1].getElementsByTagName("td")[0];
+
+                  if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                      shouldSwitch = true;
+                      break;
+                  }
+               }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
         }
     },
 
@@ -129,25 +182,50 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
     _onPortalNotificationDateSort: function(event){
         let table, rows, switching, i, x, y, shouldSwitch;
         table = document.getElementById("portalNotificationTable");
-        switching = true;
-        while (switching) {
-          switching = false;
-          rows = table.rows;
+        if(!isDateSortClicked){
+           isDateSortClicked = true;
+           switching = true;
+           while (switching) {
+             switching = false;
+             rows = table.rows;
 
-           for (i = 1; i < (rows.length - 1); i++) {
-              shouldSwitch = false;
-              x = rows[i].getElementsByTagName("td")[3];
-              y = rows[i + 1].getElementsByTagName("td")[3];
+              for (i = 1; i < (rows.length - 1); i++) {
+                 shouldSwitch = false;
+                 x = rows[i].getElementsByTagName("td")[3];
+                 y = rows[i + 1].getElementsByTagName("td")[3];
 
-              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                  shouldSwitch = true;
-                  break;
+                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                     shouldSwitch = true;
+                     break;
+                 }
+              }
+              if (shouldSwitch) {
+                  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                  switching = true;
               }
            }
-           if (shouldSwitch) {
-               rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-               switching = true;
-           }
+        }else{
+             isDateSortClicked = false;
+             switching = true;
+             while (switching) {
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                   shouldSwitch = false;
+                   x = rows[i].getElementsByTagName("td")[0];
+                   y = rows[i + 1].getElementsByTagName("td")[0];
+
+                   if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                       shouldSwitch = true;
+                       break;
+                   }
+                }
+                 if (shouldSwitch) {
+                     rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                     switching = true;
+                 }
+             }
         }
     },
 
@@ -197,16 +275,6 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
         }
     },
 
-    // show/hide menu dropdown read/unread
-    _onPortalNotificationActionMenuButton: function(event){
-        let menuItemDialog = document.getElementById("portal-notification-popup-action-menu");
-        if(menuItemDialog.style.display === "none"){
-           menuItemDialog.style.display = "block";
-        }else{
-           menuItemDialog.style.display = "none";
-        }
-    },
-
     // enable/disable all notification checkboxes when clicked
     _onCheckboxAllClicked: function(event){
         // show or hide button action when click checkbox
@@ -245,11 +313,12 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
         }
         if(notificationsListChecked){
             rpc.query({
-               model:'notification.notification.public',
-               method:'update_list_read_notification',
-               args:[notificationsListChecked],
+                model:'notification.notification.public',
+                method:'update_list_read_notification',
+                args:[notificationsListChecked],
+            }).then(function(){
+                window.location.reload();
             });
-           location.reload();
         }
     },
 
@@ -268,11 +337,12 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
         }
         if(notificationsListChecked){
             rpc.query({
-               model:'notification.notification.public',
-               method:'delete_list_unread_notification',
-               args:[notificationsListChecked],
+                model:'notification.notification.public',
+                method:'delete_list_unread_notification',
+                args:[notificationsListChecked],
+            }).then(function(){
+                window.location.reload();
             });
-           location.reload();
         }
     },
 });
