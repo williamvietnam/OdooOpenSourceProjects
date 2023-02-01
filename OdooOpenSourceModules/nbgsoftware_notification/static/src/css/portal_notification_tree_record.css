@@ -1,6 +1,6 @@
 .portal-notification-action-menu-container{
    display: none;
-   width:80%;
+   width:70%;
 }
 
 .portal-notification-action-menu-wrapper{
@@ -76,7 +76,13 @@
     -webkit-box-orient: vertical !important;
 }
 
-.portal-notification-content > p{
+.portal-notification-content > p,
+.portal-notification-content > h1,
+.portal-notification-content > h2,
+.portal-notification-content > h3,
+.portal-notification-content > h4,
+.portal-notification-content > h5,
+.portal-notification-content > h6{
     max-width: 20rem !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
@@ -85,10 +91,23 @@
     -webkit-box-orient: vertical !important;
 }
 
-.portal-notification-content > p:nth-child(n + 2) {
+.portal-notification-content > p:nth-child(n + 2),
+.portal-notification-content > h1:nth-child(n + 2),
+.portal-notification-content > h2:nth-child(n + 2),
+.portal-notification-content > h3:nth-child(n + 2),
+.portal-notification-content > h4:nth-child(n + 2),
+.portal-notification-content > h5:nth-child(n + 2),
+.portal-notification-content > h6:nth-child(n + 2){
     display: none !important;
  }
-.portal-notification-content > p:first-child {
+
+.portal-notification-content > p:first-child,
+.portal-notification-content > h1:first-child,
+.portal-notification-content > h2:first-child,
+.portal-notification-content > h3:first-child,
+.portal-notification-content > h4:first-child,
+.portal-notification-content > h5:first-child,
+.portal-notification-content > h6:first-child{
     max-width: 20rem !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
