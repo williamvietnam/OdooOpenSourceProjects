@@ -12,6 +12,7 @@
     <template id="assets_frontend" name="nbgsoftware_notification_backend_frontend" inherit_id="web.assets_frontend">
         <xpath expr="." position="inside">
             <link rel="stylesheet" type="text/scss" href="/nbgsoftware_notification_backend/static/src/css/portal_notification_tree_record.css"/>
+            <script type="text/javascript" src="/nbgsoftware_notification_backend/static/src/js/portal_notification_badge.js"/>
             <script type="text/javascript" src="/nbgsoftware_notification_backend/static/src/js/portal_notification_tree_record.js"/>
         </xpath>
     </template>
