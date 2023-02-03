@@ -17,14 +17,12 @@
         <field name="name">notification.notification.public.view.tree</field>
         <field name="model">notification.notification.public</field>
         <field name="arch" type="xml">
-            <tree js_class="notification_tree_record" export_xlsx="0" default_order="name" create="false"
-                  delete="false">
-                <field name="notification_important" widget="image" nolabel="1" readonly="1" width="15"/>
-                <field name="name" invisible="1" width="25"/>
-                <field name="title" optional="show" width="25"/>
-                <field class="ellipsis-text" name="content" optional="show" width="30"/>
-                <field name="create_notification_date_time" optional="show" width="15"/>
-                <field name="create_uid" optional="show" width="15"/>
+            <tree js_class="notification_tree_record" export_xlsx="0" create="false" delete="false">
+                <field class="notification-important" name="notification_important" widget="image" nolabel="1" readonly="1"/>
+                <field class="notification-title" name="name" optional="show"/>
+                <field class="notification-content" name="content" optional="show"/>
+                <field class="notification-date" name="create_notification_date_time" optional="show"/>
+                <field class="notification-author" name="create_uid" optional="show"/>
             </tree>
         </field>
     </record>
