@@ -47,7 +47,7 @@ odoo.define('nbgsoftware_notification.NotificationButton', function (require) {
         _getNotificationCountUnread: function () {
             var self = this;
             return self._rpc({
-                model: 'notification.notification.public',
+                model: 'is.read.notification',
                 method: 'get_notification_count_unread',
                 args: [],
             }).then(function (data) {

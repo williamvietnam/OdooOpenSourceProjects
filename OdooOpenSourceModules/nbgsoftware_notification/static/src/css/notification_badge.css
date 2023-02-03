@@ -6,43 +6,60 @@
     font-size: 9px;
 }
 
-.ellipsis-text > p,
-.ellipsis-text > h1,
-.ellipsis-text > h2,
-.ellipsis-text > h3,
-.ellipsis-text > h4,
-.ellipsis-text > h5,
-.ellipsis-text > h6{
-    max-width: 30rem !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 1 !important;
-    -webkit-box-orient: vertical !important;
+.notification-important{
+   padding: 4px 0 0 12px;
 }
 
-.ellipsis-text > p:nth-child(n + 2),
-.ellipsis-text > h1:nth-child(n + 2),
-.ellipsis-text > h2:nth-child(n + 2),
-.ellipsis-text > h3:nth-child(n + 2),
-.ellipsis-text > h4:nth-child(n + 2),
-.ellipsis-text > h5:nth-child(n + 2),
-.ellipsis-text > h6:nth-child(n + 2){
+.notification-important img{
+   height: 16px;
+   width: 16px;
+}
+
+.notification-title{
+    padding-right: 256px !important;
+    max-width: 256px !important;
+    min-width: 200px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    white-space: nowrap !important;
+}
+
+.notification-date,
+.notification-author{
+    min-width: 160px !important;
+    max-height: 24px !important;
+}
+
+.notification-content > *{
+    max-height: 24px !important;
+    font-size:14px !important;
+    display: block !important;
+    max-width: 256px !important;
+    min-width: 200px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    white-space: nowrap !important;
+}
+
+.notification-content > *:first-child{
+    font-size:14px !important;
+    display: block !important;
+    max-width: 116px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    white-space: nowrap !important;
+}
+
+.notification-content > *:nth-child(n + 2){
     display: none !important;
 }
 
-.ellipsis-text > p:first-child,
-.ellipsis-text > h1:first-child,
-.ellipsis-text > h2:first-child,
-.ellipsis-text > h3:first-child,
-.ellipsis-text > h4:first-child,
-.ellipsis-text > h5:first-child,
-.ellipsis-text > h6:first-child{
-    max-width: 30rem !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 1 !important;
-    -webkit-box-orient: vertical !important;
-    white-space: pre-wrap !important;
+.notification-content > * > *:nth-child(n + 3){
+    display: none !important;
 }

@@ -41,7 +41,7 @@ odoo.define('nbgsoftware_notification.ListController', function (require) {
 
         _onReadNotifications(){
            rpc.query({
-              model:'notification.notification.public',
+              model:'is.read.notification',
               method:'update_list_read_notification',
               args:[this.getSelectedIds()]
            }).then(function(){
@@ -51,7 +51,7 @@ odoo.define('nbgsoftware_notification.ListController', function (require) {
 
         _onUnreadNotifications(){
            rpc.query({
-              model:'notification.notification.public',
+              model:'is.read.notification',
               method:'delete_list_unread_notification',
               args:[this.getSelectedIds()]
            }).then(function(){
