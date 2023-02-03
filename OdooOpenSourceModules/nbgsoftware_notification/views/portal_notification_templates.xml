@@ -1,17 +1,4 @@
 <odoo>
-    <template id="portal_notification_layout" name="Notification" inherit_id="portal.frontend_layout" priority="10">
-        <xpath expr="//ul[@id='top_menu']" position="before">
-            <a class="o_notification_badge" style="cursor: pointer"
-               aria-label="Notification Badge" accesskey="h" href="/notifications">
-                <i role="img" aria-label="Notifications" class="fa fa-bell" style="font-size: 22px"/>
-                <t t-set="count" t-value="notification_count"/>
-                <span class="o_NotificationBadge_counter badge badge-pill"
-                      t-esc="count"
-                      style="background-color: red; font-size: 9px; position: relative; color: white; transform: translate(-16px, -12px);"/>
-            </a>
-        </xpath>
-    </template>
-
     <template id="website_portal_my_notification" name="My Notifications">
         <t t-call="portal.portal_layout">
             <t t-set="breadcrumbs_searchbar" t-value="True"/>
@@ -35,7 +22,7 @@
                             </style>
 
                             <div style="">
-                                <h2 style="display: inline-block;">Notifications</h2>
+                                <h4 style="display: inline-block;">Notifications</h4>
                                 <div class="portal-notification-action-menu-container">
                                     <div class="portal-notification-action-menu-wrapper">
                                         <div class="portal-notification-dropdown">
@@ -44,7 +31,8 @@
                                                 <span style="margin-right:6px">Action</span>
                                             </div>
 
-                                            <div id="portal-notification-popup-action-menu" class="notification-dropdown-content">
+                                            <div id="portal-notification-popup-action-menu"
+                                                 class="notification-dropdown-content">
                                                 <div id="portal-notification-read-item"
                                                      class="portal-notification-item">
                                                     Read
@@ -61,30 +49,30 @@
 
                             <input type="text" id="portalNotificationSearch"
                                    class="portalNotificationInputSearch fa fa-search"
-                                   placeholder="タイトルを検索する.." title="Type in a name"/>
+                                   placeholder="Search for titles..." title="Type in a title"/>
 
                             <table id="portalNotificationTable"
                                    class="table order-table table-striped table-hover o_my_status_table col-md-12"
                                    width="100%">
-                                <thead>
+                                <thead style="background-color: rgba(255,255,255,1);">
                                     <tr class="active">
                                         <th style="width=1px; height=1px">
                                             <input type="checkbox" class="portal-notification-checkbox-all"/>
                                             <span style="color:transparent;">ID</span>
                                         </th>
-                                        <th class="portal-notification-title" style="cursor: pointer;">
+                                        <th id="portal-notification-title-header" style="cursor: pointer;">
                                             <div style="display: inline-block; padding: 8px;">Title</div>
                                             <i class="fa fa-sort-down"/>
                                         </th>
-                                        <th class="portal-notification-content" style="cursor: pointer;">
+                                        <th id="portal-notification-content-header" style="cursor: pointer;">
                                             <div style="display: inline-block; padding: 8px;">Summary Content</div>
                                             <i class="fa fa-sort-down"/>
                                         </th>
-                                        <th class="portal-notification-date" style="cursor: pointer;">
+                                        <th id="portal-notification-date-header" style="cursor: pointer;">
                                             <div style="display: inline-block; padding: 8px;">Create at</div>
                                             <i class="fa fa-sort-down"/>
                                         </th>
-                                        <th class="portal-notification-author" style="cursor: pointer;">
+                                        <th id="portal-notification-author-header" style="cursor: pointer;">
                                             <div style="display: inline-block; padding: 8px;">Create by</div>
                                             <i class="fa fa-sort-down"/>
                                         </th>
@@ -96,13 +84,14 @@
                                 <t t-foreach="notifications" t-as="notification">
                                     <t t-if="is_read_notifications_list">
                                         <t t-if='is_read_notifications_list[notification.id]'>
-                                            <tr class="row-notification">
+                                            <tr class="row-notification" style="cursor:pointer; background-color: rgba(255,255,255,0.8);">
                                                 <td style="width=1px; height=1px">
                                                     <input type="checkbox" class="portal-notification-checkbox"/>
                                                     <span style="color:transparent" t-field="notification.id"/>
                                                 </td>
                                                 <td class="cell_overflow">
-                                                    <span t-field="notification.title"/>
+                                                    <span class="portal-notification-title"
+                                                          t-field="notification.name"/>
                                                 </td>
                                                 <td>
                                                     <span class="portal-notification-content"
@@ -124,13 +113,14 @@
                                         </t>
                                         <t t-else="">
                                             <tr class="row-notification"
-                                                style="background: rgba(35,35,35,0.25); color:black">
+                                                style="color:black; cursor:pointer; font-weight: bold!important; background-color:rgba(0,0,0,0.01);">
                                                 <td style="width=1px; height=1px">
                                                     <input type="checkbox" class="portal-notification-checkbox"/>
                                                     <span style="color:transparent" t-field="notification.id"/>
                                                 </td>
                                                 <td class="cell_overflow">
-                                                    <span t-field="notification.title"/>
+                                                    <span class="portal-notification-title"
+                                                          t-field="notification.name"/>
                                                 </td>
                                                 <td>
                                                     <span class="portal-notification-content"
@@ -153,13 +143,14 @@
                                     </t>
                                     <t t-else="">
                                         <tr class="row-notification"
-                                            style="background: rgba(35,35,35,0.25); color:black">
+                                            style="color:black; cursor:pointer; font-weight: bold!important; background-color:rgba(0,0,0,0.01);">
                                             <td style="width=1px; height=1px">
                                                 <input type="checkbox" class="portal-notification-checkbox"/>
                                                 <span style="color:transparent" t-field="notification.id"/>
                                             </td>
                                             <td class="cell_overflow">
-                                                <span t-field="notification.title"/>
+                                                <span class="portal-notification-title"
+                                                      t-field="notification.name"/>
                                             </td>
                                             <td>
                                                 <span class="portal-notification-content"

@@ -67,52 +67,61 @@
    background-image: url("../../description/icon_search.png");
 }
 
+.portal-notification-title{
+    max-height: 24px !important;
+    font-size: 14px !important;
+    display: block !important;
+    max-width: 200px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    white-space: nowrap !important;
+}
+
 .portal-notification-content{
-    max-width: 20rem !important;
+    max-height: 24px !important;
+    font-size:14px !important;
+    display: block !important;
+    max-width: 108px !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    display: -webkit-box !important;
     -webkit-line-clamp: 1 !important;
     -webkit-box-orient: vertical !important;
+    white-space: nowrap !important;
 }
 
-.portal-notification-content > p,
-.portal-notification-content > h1,
-.portal-notification-content > h2,
-.portal-notification-content > h3,
-.portal-notification-content > h4,
-.portal-notification-content > h5,
-.portal-notification-content > h6{
-    max-width: 20rem !important;
+.portal-notification-content > *{
+    max-height: 24px !important;
+    font-size:14px !important;
+    display: block !important;
+    max-width: 108px !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    display: -webkit-box !important;
     -webkit-line-clamp: 1 !important;
     -webkit-box-orient: vertical !important;
+    white-space: nowrap !important;
 }
 
-.portal-notification-content > p:nth-child(n + 2),
-.portal-notification-content > h1:nth-child(n + 2),
-.portal-notification-content > h2:nth-child(n + 2),
-.portal-notification-content > h3:nth-child(n + 2),
-.portal-notification-content > h4:nth-child(n + 2),
-.portal-notification-content > h5:nth-child(n + 2),
-.portal-notification-content > h6:nth-child(n + 2){
+.portal-notification-content > *:first-child{
+    font-size:14px !important;
+    display: block !important;
+    max-width: 108px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    white-space: nowrap !important;
+}
+
+.portal-notification-content > *:nth-child(n + 2){
     display: none !important;
  }
 
-.portal-notification-content > p:first-child,
-.portal-notification-content > h1:first-child,
-.portal-notification-content > h2:first-child,
-.portal-notification-content > h3:first-child,
-.portal-notification-content > h4:first-child,
-.portal-notification-content > h5:first-child,
-.portal-notification-content > h6:first-child{
-    max-width: 20rem !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 1 !important;
-    -webkit-box-orient: vertical !important;
-    white-space: pre-wrap !important;
+.portal-notification-content > * > *:nth-child(n + 3){
+    display: none !important;
+}
+
+.row-notification:hover{
+    background-color: rgba(0,0,0,0.15)!important;
 }

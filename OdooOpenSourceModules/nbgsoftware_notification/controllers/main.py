@@ -8,12 +8,6 @@ class CustomerNotificationPortal(CustomerPortal):
 
     def _prepare_portal_layout_values(self):
         values = super(CustomerNotificationPortal, self)._prepare_portal_layout_values()
-
-        # Notifications count
-        notification_count = request.env['notification.notification.public'].get_notification_count_unread()
-        values.update({
-            'notification_count': notification_count
-        })
         return values
 
     @http.route([
@@ -29,7 +23,7 @@ class CustomerNotificationPortal(CustomerPortal):
         url = "/notifications"
         notifications = notification.search([('user_ids', 'in', request.env.user.ids)])
         for i in notifications:
-            if notification.is_read_notification_through_notification_id(i.id):
+            if request.env['is.read.notification'].is_read_notification_through_notification_id(i.id):
                 is_read_notifications_list[i.id] = True
             else:
                 is_read_notifications_list[i.id] = False

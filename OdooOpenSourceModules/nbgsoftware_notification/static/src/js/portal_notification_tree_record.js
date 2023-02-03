@@ -13,10 +13,10 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
     selector: '.portal-notification-container',
     events: {
         'click .row-notification': '_onNotificationClicked',
-        'click .portal-notification-title': '_onPortalNotificationTitleSort',
-        'click .portal-notification-content': '_onPortalNotificationContentSort',
-        'click .portal-notification-date': '_onPortalNotificationDateSort',
-        'click .portal-notification-author': '_onPortalNotificationAuthorSort',
+        'click #portal-notification-title-header': '_onPortalNotificationTitleSort',
+        'click #portal-notification-content-header': '_onPortalNotificationContentSort',
+        'click #portal-notification-date-header': '_onPortalNotificationDateSort',
+        'click #portal-notification-author-header': '_onPortalNotificationAuthorSort',
         'keyup .portalNotificationInputSearch': '_onPortalNotificationInputSearch',
         'click .portal-notification-checkbox-all': '_onCheckboxAllClicked',
         'click .portal-notification-checkbox': '_onCheckboxClicked',
@@ -43,13 +43,13 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
          const words = record.split('\t');
 
          rpc.query({
-              model:'notification.notification.public',
-              method:'update_is_read_notification_through_notification_id',
+              model:'is.read.notification',
+              method:'update_is_read_notification',
               args:[Number(words[0])],
          });
 
          rpc.query({
-            model: 'notification.notification.public',
+            model: 'is.read.notification',
             method: 'get_notifications_data',
             args:[Number(words[0])],
          }).then(function(data){
@@ -57,12 +57,12 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
                const container = document.createElement('div');
                container.id = "notification-root";
                container.innerHTML = `<div class="notification-container" style="position:absolute; background-color:rgba(0,0,0,0.3); height:100vh; width:100vw; display:flex; justify-content: center; align-items: center; top:0;">
-                 <div class="wrapper" style="background-color:#fff; border-radius:8px; padding:20px 40px; width:888px; max-width:100%">
+                 <div class="wrapper" style="background-color:#fff; border-radius:8px; padding:20px 40px; max-width:80%; min-width: 50%;">
                    <div class="heading-wrapper" style="display:flex; justify-content: space-between; align-items: center;">
-                      <h1 class="title" style="margin:auto;">${data[0].name}</h1>
-                      <button class="close-button" onclick="window.location.reload();" style="background-color:#A3B9E2; border:0; border-radius: 5px; box-shadow: 0 2px 4px rgb(0 0 0 / 20%); color:white; padding: 6px 20px; font-size: 14px;">閉じる</button>
+                      <h2 class="title" style="margin:auto; word-wrap: break-word; white-space: pre-wrap; max-width: 80%;">${data[0].name}</h2>
+                      <button class="close-button" onclick="window.location.reload();" style="min-width: 88px; background-color:#A3B9E2; border:0; border-radius: 5px; box-shadow: 0 2px 4px rgb(0 0 0 / 20%); color:white; padding: 6px 20px; font-size: 14px;">閉じる</button>
                    </div>
-                   <div class="content" style="font-size:16px; margin-top:16px; word-wrap: break-word; overflow-wrap: break-word; overflow-y: scroll; max-height: 512px;">${data[0].content}</div>
+                   <div class="content" style="font-size:16px; margin-top:16px; word-wrap: break-word; overflow-wrap: break-word; overflow-y: scroll; max-height: 68vh;">${data[0].content}</div>
                    <div class="footer-wrapper" style="display:flex; justify-content: space-between; align-items: center; margin-top: 40px;">
                      <h6 class="notification-date" style="font-size:14px;">${data[0].create_notification_date_time}</h6>
                      <h6 class="notification_author" style="font-size:14px; color: darkgreen;">${words[4]}</h6>
@@ -106,15 +106,15 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
            isTitleSortClicked = false;
            switching = true;
            while (switching) {
-              switching = false;
-              rows = table.rows;
+             switching = false;
+             rows = table.rows;
 
               for (i = 1; i < (rows.length - 1); i++) {
                  shouldSwitch = false;
-                 x = rows[i].getElementsByTagName("td")[0];
-                 y = rows[i + 1].getElementsByTagName("td")[0];
+                 x = rows[i].getElementsByTagName("td")[1];
+                 y = rows[i + 1].getElementsByTagName("td")[1];
 
-                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                 if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
                      shouldSwitch = true;
                      break;
                  }
@@ -157,23 +157,23 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
             isContentSortClicked = false;
             switching = true;
             while (switching) {
-               switching = false;
-               rows = table.rows;
+              switching = false;
+              rows = table.rows;
 
                for (i = 1; i < (rows.length - 1); i++) {
                   shouldSwitch = false;
-                  x = rows[i].getElementsByTagName("td")[0];
-                  y = rows[i + 1].getElementsByTagName("td")[0];
+                  x = rows[i].getElementsByTagName("td")[2];
+                  y = rows[i + 1].getElementsByTagName("td")[2];
 
-                  if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                  if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
                       shouldSwitch = true;
                       break;
                   }
                }
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                }
+               if (shouldSwitch) {
+                   rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                   switching = true;
+               }
             }
         }
     },
@@ -208,23 +208,23 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
              isDateSortClicked = false;
              switching = true;
              while (switching) {
-                switching = false;
-                rows = table.rows;
+               switching = false;
+               rows = table.rows;
 
-                for (i = 1; i < (rows.length - 1); i++) {
+               for (i = 1; i < (rows.length - 1); i++) {
                    shouldSwitch = false;
-                   x = rows[i].getElementsByTagName("td")[0];
-                   y = rows[i + 1].getElementsByTagName("td")[0];
+                   x = rows[i].getElementsByTagName("td")[3];
+                   y = rows[i + 1].getElementsByTagName("td")[3];
 
-                   if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                   if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
                        shouldSwitch = true;
                        break;
                    }
-                }
-                 if (shouldSwitch) {
-                     rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                     switching = true;
-                 }
+               }
+               if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+               }
              }
         }
     },
@@ -313,7 +313,7 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
         }
         if(notificationsListChecked){
             rpc.query({
-                model:'notification.notification.public',
+                model:'is.read.notification',
                 method:'update_list_read_notification',
                 args:[notificationsListChecked],
             }).then(function(){
@@ -337,7 +337,7 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
         }
         if(notificationsListChecked){
             rpc.query({
-                model:'notification.notification.public',
+                model:'is.read.notification',
                 method:'delete_list_unread_notification',
                 args:[notificationsListChecked],
             }).then(function(){

@@ -18,12 +18,12 @@
         <field name="model">notification.notification</field>
         <field name="arch" type="xml">
             <tree export_xlsx="0">
-                <field name="notification_important" widget="image" nolabel="1" readonly="1" width="15"/>
-                <field name="title" optional="show" width="25"/>
-                <field class="ellipsis-text" name="content" optional="show" width="30"/>
-                <field name="user_ids" optional="hide" widget="many2many_tags" width="15"/>
-                <field name="create_notification_date_time" optional="show" width="15"/>
-                <field name="create_uid" optional="show" width="15"/>
+                <field class="notification-important" name="notification_important" widget="image" nolabel="1" readonly="1"/>
+                <field class="notification-title" name="name" optional="show"/>
+                <field class="notification-content" name="content" optional="show"/>
+                <field name="user_ids" optional="hide" widget="many2many_tags"/>
+                <field class="notification-date" name="create_notification_date_time" optional="show"/>
+                <field class="notification-author" name="create_uid" optional="show"/>
             </tree>
         </field>
     </record>
