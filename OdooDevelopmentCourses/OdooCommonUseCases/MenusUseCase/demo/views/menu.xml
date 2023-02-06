@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--Actions-->
+    <record id="action_1" model="ir.actions.act_window">
+        <field name="name">Menu Item 1</field>
+        <field name="res_model">demo</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="action_2" model="ir.actions.act_window">
+        <field name="name">Menu Item 2</field>
+        <field name="res_model">demo</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="sub_action_1" model="ir.actions.act_window">
+        <field name="name">Sub Menu Item 1</field>
+        <field name="res_model">demo</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="sub_action_2" model="ir.actions.act_window">
+        <field name="name">Sub Menu Item 2</field>
+        <field name="res_model">demo</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <!--Menus-->
+    <menuitem id="menu_root" name="Menus UseCase Demo" groups="base.group_user"
+              web_icon="demo, static/description/menu_icon.png">
+        <menuitem id="menu_item1"
+                  name="MenuItem1"
+                  action="action_1"
+                  sequence="1"/>
+        <menuitem id="menu_item2"
+                  name="MenuItem2"
+                  action="action_2"
+                  sequence="2"/>
+        <menuitem id="menu_more"
+                  name="Menu More"
+                  sequence="3"/>
+    </menuitem>
+
+    <menuitem id="sub_menu_item1"
+              name="SubMenuItem1"
+              parent="menu_more"
+              action="sub_action_1"
+              sequence="1"/>
+
+    <menuitem id="sub_menu_item1"
+              name="SubMenuItem1"
+              parent="menu_more"
+              action="sub_action_2"
+              sequence="2"/>
+</odoo>
