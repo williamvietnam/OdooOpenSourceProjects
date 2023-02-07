@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <template id="assets_backend" name="Usmh assets backend" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/demo/static/src/js/demo.js"/>
+            </xpath>
+        </template>
+        <template id="assets_frontend" name="Usmh assets frontend" inherit_id="web.assets_frontend">
+            <xpath expr="." position="inside">
+
+            </xpath>
+        </template>
+</odoo>

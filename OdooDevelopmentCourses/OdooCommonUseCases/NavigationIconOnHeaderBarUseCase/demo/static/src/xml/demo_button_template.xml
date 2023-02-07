@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-extend="Menu">
+        <t t-jquery=".o_menu_sections" t-operation="after">
+                <a class="o_demo" style="cursor: pointer"
+                   autofocus="autofocus" aria-label="Demo Button"
+                   accesskey="h">
+                    <i role="img" aria-label="Demo" class="fa fa-bell"/>
+                </a>
+        </t>
+    </t>
+</templates>
