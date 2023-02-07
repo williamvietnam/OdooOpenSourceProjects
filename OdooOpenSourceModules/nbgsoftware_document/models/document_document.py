@@ -21,7 +21,7 @@ class DocumentDocument(models.Model):
 
     @api.onchange('is_public')
     def _onchange_is_public(self):
-        all_portals = self.env['res.users'].search([('share', '=', True)])
+        all_portals = self.env['res.users'].search([])
         if self.is_public:
             self.portal_ids = [(6, 0, all_portals.ids)]
         else:

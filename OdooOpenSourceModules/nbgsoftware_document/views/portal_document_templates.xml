@@ -38,10 +38,7 @@
 
     <template id="website_portal_my_document" name="My Document">
         <t t-call="portal.portal_layout">
-            <t t-set="breadcrumbs_searchbar" t-value="True"/>
-            <t t-call="portal.portal_searchbar">
-                <t t-set="title">Your Documents</t>
-            </t>
+            <t t-set="breadcrumbs_searchbar"/>
             <div class="container custom_container">
                 <div id="exTab2" class="order-table-wrapper table-container">
                     <div class="collapse d-lg-block sidebar" id="wsale_products_categories_collapse">
@@ -101,7 +98,7 @@
                                                 <a t-att-href="base_url + '/web/content/?model=document.document&amp;id=' + str(document.id) + '&amp;field=file_data&amp;filename_field=name&amp;download=true' "
                                                    class="pull-right" title="Download">
                                                     <i class="fa fa-download fa-2x" role="img"
-                                                       aria-label="Download"></i>
+                                                       aria-label="Download"/>
                                                 </a>
                                             </td>
                                         </tr>
