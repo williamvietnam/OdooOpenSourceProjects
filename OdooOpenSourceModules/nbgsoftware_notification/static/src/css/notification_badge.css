@@ -16,7 +16,7 @@
 }
 
 .notification-title{
-    padding-right: 256px !important;
+    font-size: 14px;
     max-width: 256px !important;
     min-width: 200px !important;
     overflow: hidden !important;
@@ -29,12 +29,13 @@
 .notification-date,
 .notification-author{
     min-width: 160px !important;
-    max-height: 24px !important;
+    max-height: 26px !important;
+    font-size: 14px !important;
 }
 
 .notification-content > *{
-    max-height: 24px !important;
-    font-size:14px !important;
+    max-height: 26px !important;
+    font-size: 14px !important;
     display: block !important;
     max-width: 256px !important;
     min-width: 200px !important;
@@ -46,7 +47,7 @@
 }
 
 .notification-content > *:first-child{
-    font-size:14px !important;
+    font-size: 14px !important;
     display: block !important;
     max-width: 116px !important;
     overflow: hidden !important;

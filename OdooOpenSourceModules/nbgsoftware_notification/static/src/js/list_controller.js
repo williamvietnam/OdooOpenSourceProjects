@@ -10,7 +10,6 @@ odoo.define('nbgsoftware_notification.ListController', function (require) {
 
         _getActionMenuItems: function(state) {
             let actionMenuItems = this._super(...arguments);
-            console.log(actionMenuItems)
             //hide Export in action
             if (state.model === 'notification.notification' || state.model === 'notification.tag') {
                 const otherList = actionMenuItems?.items.other
