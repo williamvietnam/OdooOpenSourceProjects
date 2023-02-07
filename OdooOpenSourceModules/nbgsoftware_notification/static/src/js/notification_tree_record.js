@@ -12,6 +12,26 @@ var isCheckbox = 1;
 
 var NotificationTreeRenderer = ListRenderer.extend({
 
+    _renderBodyCell: function(record, node, colIndex, options){
+         var $td = this._super.apply(this, arguments);
+         if($td.hasClass("notification-title")){
+             let title = $td.text();
+             if(title.length > 20){
+                title = title.slice(0,20) + "...";
+             }
+             $td.html(title);
+         }else if($td.hasClass("notification-content")){
+             let content = $td.text();
+             if(content.length > 0){
+                if(content.length > 10){
+                   content = content.slice(0,10) + "...";
+                }
+                $td.html(content);
+             }
+         }
+         return $td;
+    },
+
    _renderRow: function (record) {
        hash[record.id]=record.data;
        var $row = this._super.apply(this, arguments);
@@ -21,10 +41,10 @@ var NotificationTreeRenderer = ListRenderer.extend({
           args:[record.data.id]
        }).then(function(is_read_notification){
           const styleRow = document.createElement('style');
-          styleRow.innerHTML = `.background-row-notification-unread{background-color: rgba(0,0,0,0.05)!important; color:black; font-weight:bold;}
+          styleRow.innerHTML = `.background-row-notification-unread{background-color: rgba(255,255,255,0.1)!important; color:black; font-weight:bold;}
                                 .background-row-notification-read{background-color: rgba(255,255,255,0.1)!important;}
-                                .background-row-notification-unread:hover{background-color: rgba(0,0,0,0.1)!important;}
-                                .background-row-notification-read:hover{background-color: rgba(0,0,0,0.1) !important;}`;
+                                .background-row-notification-unread:hover{background-color: rgba(0,0,0,0.05)!important;}
+                                .background-row-notification-read:hover{background-color: rgba(0,0,0,0.05) !important;}`;
           if(!is_read_notification){
              $row.addClass("background-row-notification-unread");
           }else{

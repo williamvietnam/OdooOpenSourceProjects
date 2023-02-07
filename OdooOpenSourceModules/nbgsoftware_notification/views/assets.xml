@@ -3,6 +3,7 @@
     <template id="assets_backend" name="nbgsoftware_notification_backend" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
             <script type="text/javascript" src="/nbgsoftware_notification_backend/static/src/js/list_controller.js"/>
+             <script type="text/javascript" src="/nbgsoftware_notification_backend/static/src/js/admin_notification_tree_record.js"/>
             <script type="text/javascript" src="/nbgsoftware_notification_backend/static/src/js/notification_tree_record.js"/>
             <script type="text/javascript" src="/nbgsoftware_notification_backend/static/src/js/notification_badge.js"/>
             <link rel="stylesheet" type="text/scss" href="/nbgsoftware_notification_backend/static/src/css/notification_badge.css"/>

@@ -17,7 +17,7 @@
         <field name="name">notification.notification.view.tree</field>
         <field name="model">notification.notification</field>
         <field name="arch" type="xml">
-            <tree export_xlsx="0">
+            <tree js_class="admin_notification_tree_record" export_xlsx="0">
                 <field class="notification-important" name="notification_important" widget="image" nolabel="1" readonly="1"/>
                 <field class="notification-title" name="name" optional="show"/>
                 <field class="notification-content" name="content" optional="show"/>

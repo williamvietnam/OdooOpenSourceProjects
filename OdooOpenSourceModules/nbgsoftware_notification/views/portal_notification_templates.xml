@@ -113,7 +113,7 @@
                                         </t>
                                         <t t-else="">
                                             <tr class="row-notification"
-                                                style="color:black; cursor:pointer; font-weight: bold!important; background-color:rgba(0,0,0,0.01);">
+                                                style="color:black; cursor:pointer; font-weight: bold!important; background-color: rgba(255,255,255,0.8);">
                                                 <td style="width=1px; height=1px">
                                                     <input type="checkbox" class="portal-notification-checkbox"/>
                                                     <span style="color:transparent" t-field="notification.id"/>
@@ -143,7 +143,7 @@
                                     </t>
                                     <t t-else="">
                                         <tr class="row-notification"
-                                            style="color:black; cursor:pointer; font-weight: bold!important; background-color:rgba(0,0,0,0.01);">
+                                            style="color:black; cursor:pointer; font-weight: bold!important; background-color: rgba(255,255,255,0.8);">
                                             <td style="width=1px; height=1px">
                                                 <input type="checkbox" class="portal-notification-checkbox"/>
                                                 <span style="color:transparent" t-field="notification.id"/>

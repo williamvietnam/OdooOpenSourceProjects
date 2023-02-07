@@ -26,11 +26,16 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
 
     start: function () {
         var def = this._super.apply(this, arguments);
-        const tagsElementsClasses = document.getElementsByClassName("portal_notification_tag_ids");
-        for(let i = 0; i < tagsElementsClasses.length; i++){
-             let tagsElementString = tagsElementsClasses[i].innerText;
-             let tagsArray = tagsElementString.split(",");
-             console.log(tagsArray);
+        let i;
+        const notificationTitleElementsClass = document.getElementsByClassName("portal-notification-title");
+        const notificationContentElementsClass = document.getElementsByClassName("portal-notification-content");
+        for(i = 0; i < notificationTitleElementsClass.length; i++){
+           if(notificationTitleElementsClass[i].innerText.length > 20){
+               notificationTitleElementsClass[i].innerText = notificationTitleElementsClass[i].innerText.slice(0,20) + "...";
+           }
+           if(notificationContentElementsClass[i].innerText.length > 10){
+              notificationContentElementsClass[i].innerText = notificationContentElementsClass[i].innerText.slice(0,10) + "...";
+           }
         }
         return def;
     },
@@ -59,12 +64,12 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
                container.innerHTML = `<div class="notification-container" style="position:absolute; background-color:rgba(0,0,0,0.3); height:100vh; width:100vw; display:flex; justify-content: center; align-items: center; top:0;">
                  <div class="wrapper" style="background-color:#fff; border-radius:8px; padding:20px 40px; max-width:80%; min-width: 50%;">
                    <div class="heading-wrapper" style="display:flex; justify-content: space-between; align-items: center;">
-                      <h2 class="title" style="margin:auto; word-wrap: break-word; white-space: pre-wrap; max-width: 80%;">${data[0].name}</h2>
+                      <h2 class="title" style="margin:auto; word-wrap: break-word; white-space: pre-wrap; max-width: 80%;">${data['name']}</h2>
                       <button class="close-button" onclick="window.location.reload();" style="min-width: 88px; background-color:#A3B9E2; border:0; border-radius: 5px; box-shadow: 0 2px 4px rgb(0 0 0 / 20%); color:white; padding: 6px 20px; font-size: 14px;">閉じる</button>
                    </div>
-                   <div class="content" style="font-size:16px; margin-top:16px; word-wrap: break-word; overflow-wrap: break-word; overflow-y: scroll; max-height: 68vh;">${data[0].content}</div>
+                   <div class="content" style="font-size:16px; margin-top:16px; word-wrap: break-word; overflow-wrap: break-word; overflow-y: scroll; max-height: 68vh;">${data['content']}</div>
                    <div class="footer-wrapper" style="display:flex; justify-content: space-between; align-items: center; margin-top: 40px;">
-                     <h6 class="notification-date" style="font-size:14px;">${data[0].create_notification_date_time}</h6>
+                     <h6 class="notification-date" style="font-size:14px;">${data['create_notification_date_time']}</h6>
                      <h6 class="notification_author" style="font-size:14px; color: darkgreen;">${words[4]}</h6>
                    </div>
                  </div>

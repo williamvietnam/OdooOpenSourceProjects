@@ -95,7 +95,16 @@ class IsReadNotification(models.Model):
     # get all notifications include notifications read and notifications unread
     @api.model
     def get_notifications_data(self, notification_id):
-        return self.env['notification.notification.public'].search([('id', '=', notification_id)])
+        dictionary = {}
+        notification = self.env['notification.notification.public'].search([('id', '=', notification_id)], limit=1)
+        if notification:
+            dictionary['id'] = notification.id
+            dictionary['name'] = notification.name
+            dictionary['content'] = notification.content
+            dictionary['create_notification_date_time'] = notification.create_notification_date_time
+            return dictionary
+        else:
+            return False
 
     # remove a notification_id from notifications list read with notification_id condition
     @api.model
