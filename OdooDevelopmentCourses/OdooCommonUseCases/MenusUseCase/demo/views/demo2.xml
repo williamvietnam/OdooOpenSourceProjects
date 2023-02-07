@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="demo_view_tree" model="ir.ui.view">
-        <field name="name">demo.view.tree</field>
-        <field name="model">demo</field>
+    <record id="demo2_view_tree" model="ir.ui.view">
+        <field name="name">demo2.view.tree</field>
+        <field name="model">demo2</field>
         <field name="arch" type="xml">
             <tree export_xlsx="0">
                 <field name="name" optional="show"/>
@@ -11,9 +11,9 @@
         </field>
     </record>
 
-    <record id="notification_notification_view_form" model="ir.ui.view">
-        <field name="name">notification.notification.view.form</field>
-        <field name="model">notification.notification</field>
+    <record id="demo2_view_form" model="ir.ui.view">
+        <field name="name">demo2.view.form</field>
+        <field name="model">demo2</field>
         <field name="arch" type="xml">
             <form duplicate="false">
                 <sheet>

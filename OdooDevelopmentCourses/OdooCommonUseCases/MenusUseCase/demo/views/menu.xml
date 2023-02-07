@@ -3,7 +3,7 @@
     <!--Actions-->
     <record id="action_1" model="ir.actions.act_window">
         <field name="name">Menu Item 1</field>
-        <field name="res_model">demo</field>
+        <field name="res_model">demo1</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
@@ -11,7 +11,7 @@
 
     <record id="action_2" model="ir.actions.act_window">
         <field name="name">Menu Item 2</field>
-        <field name="res_model">demo</field>
+        <field name="res_model">demo2</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
@@ -19,7 +19,7 @@
 
     <record id="sub_action_1" model="ir.actions.act_window">
         <field name="name">Sub Menu Item 1</field>
-        <field name="res_model">demo</field>
+        <field name="res_model">sub.demo1</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
@@ -27,7 +27,7 @@
 
     <record id="sub_action_2" model="ir.actions.act_window">
         <field name="name">Sub Menu Item 2</field>
-        <field name="res_model">demo</field>
+        <field name="res_model">sub.demo2</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
