@@ -5,6 +5,14 @@ from odoo.exceptions import ValidationError
 class DocumentDocumentPublic(models.Model):
     _name = 'document.document.public'
 
+    def _get_users_domain(self):
+        group_user = self.env.ref('base.group_system', raise_if_not_found=False)
+        if group_user:
+            admin_ids = group_user.users
+            return ['&', ('id', 'not in', admin_ids.ids), ('id', '!=', self.env.uid)] if admin_ids else []
+        else:
+            return []
+
     name = fields.Char('File Name')
     file_data = fields.Binary('File', attachment=True)
     folder_id = fields.Many2one('document.folder', string="Workspace")
@@ -13,7 +21,7 @@ class DocumentDocumentPublic(models.Model):
     file_size = fields.Integer(related='attachment_id.file_size', store=True, string='File Size (bytes)')
     is_public = fields.Boolean(default=True, string='Is Public')
     portal_ids = fields.Many2many('res.users', 'document_document_users_rel', 'document_id', 'user_id',
-                                  domain=[('share', '=', True)])
+                                  domain=_get_users_domain)
 
     type = fields.Selection([('binary', 'File'), ('empty', 'Request')],
                             string='Type', required=True, store=True, default='empty', change_default=True,

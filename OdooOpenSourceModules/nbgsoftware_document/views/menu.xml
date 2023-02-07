@@ -35,6 +35,7 @@
               name="My Documents"
               parent="menu_document_document"
               action="action_document_document"
+              groups="usmh_document.group_document_admin"
               sequence="1"/>
     <menuitem id="menu_document_document_public"
               name="Public Documents"

@@ -131,12 +131,11 @@
                                             <button name="save_to_file" string="Download file" type="object"
                                                     class="btn btn-secondary fa fa-download"/>
                                             <span class="text-success mb4" t-if="record.is_public.raw_value">
-                                                <i class="fa fa-circle" role="img" aria-label="Public"
-                                                   title="Public"></i>
+                                                <i class="fa fa-circle" role="img" aria-label="Public" title="Public"/>
                                             </span>
                                             <span class="text-gray mb4" t-if="!record.is_public.raw_value">
                                                 <i class="fa fa-circle" role="img" aria-label="Unpublic"
-                                                   title="Unpublic"></i>
+                                                   title="Unpublic"/>
                                             </span>
                                         </div>
                                     </div>
