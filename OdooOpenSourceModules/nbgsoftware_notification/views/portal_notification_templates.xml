@@ -21,8 +21,13 @@
                                 }
                             </style>
 
-                            <div style="">
-                                <h4 style="display: inline-block;">Notifications</h4>
+                            <div style="width:100%; background-color:white; padding: 8px 0 2px 8px; border-radius:6px; margin-bottom:14px;">
+                                <div style="display:inline-block">
+                                    <a style="display:block!important; font-size:24px;"
+                                       class="fa fa-home"
+                                       aria-hidden="true" href="/my/home"/>
+                                </div>
+                                <h5 style="margin-left:8px; display: inline-block;">Notifications</h5>
                                 <div class="portal-notification-action-menu-container">
                                     <div class="portal-notification-action-menu-wrapper">
                                         <div class="portal-notification-dropdown">
@@ -84,7 +89,8 @@
                                 <t t-foreach="notifications" t-as="notification">
                                     <t t-if="is_read_notifications_list">
                                         <t t-if='is_read_notifications_list[notification.id]'>
-                                            <tr class="row-notification" style="cursor:pointer; background-color: rgba(255,255,255,0.8);">
+                                            <tr class="row-notification"
+                                                style="cursor:pointer; background-color: rgba(255,255,255,0.8);">
                                                 <td style="width=1px; height=1px">
                                                     <input type="checkbox" class="portal-notification-checkbox"/>
                                                     <span style="color:transparent" t-field="notification.id"/>
