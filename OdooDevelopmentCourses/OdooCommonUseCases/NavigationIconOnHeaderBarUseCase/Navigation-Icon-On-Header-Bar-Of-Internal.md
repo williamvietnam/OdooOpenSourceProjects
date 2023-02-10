@@ -13,7 +13,7 @@ class Demo(models.Model):
 
     @api.model
     def get_button_action(self):
-        action_id = self.env.ref('usmh_notification.action_notification_public', raise_if_not_found=False)
+        action_id = self.env.ref('nbg_notification.action_notification_public', raise_if_not_found=False)
         menu = self.env.ref('demo.menu_root')
         url = '/web#action=%s&model=demo&view_type=list&cids=1&menu_id=%s' % (
             action_id.id, menu.id)
