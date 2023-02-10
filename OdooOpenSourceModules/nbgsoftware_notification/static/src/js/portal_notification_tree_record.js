@@ -8,6 +8,7 @@ var rpc = require('web.rpc');
 var isTitleSortClicked = false;
 var isContentSortClicked = false;
 var isDateSortClicked = false;
+var isMobileScreen = window.matchMedia("(max-width: 512px)");
 
 publicWidget.registry.app_action  = PortalSidebar.extend({
     selector: '.portal-notification-container',
@@ -59,22 +60,31 @@ publicWidget.registry.app_action  = PortalSidebar.extend({
             args:[Number(words[0])],
          }).then(function(data){
            if(data){
-               const container = document.createElement('div');
-               container.id = "notification-root";
-               container.innerHTML = `<div class="notification-container" style="position:absolute; background-color:rgba(0,0,0,0.3); height:100vh; width:100vw; display:flex; justify-content: center; align-items: center; top:0;">
-                 <div class="wrapper" style="background-color:#fff; border-radius:8px; padding:20px 40px; max-width:80%; min-width: 50%;">
-                   <div class="heading-wrapper" style="display:flex; justify-content: space-between; align-items: center;">
-                      <h2 class="title" style="margin:auto; word-wrap: break-word; white-space: pre-wrap; max-width: 80%;">${data['name']}</h2>
-                      <button class="close-button" onclick="window.location.reload();" style="min-width: 88px; background-color:#A3B9E2; border:0; border-radius: 5px; box-shadow: 0 2px 4px rgb(0 0 0 / 20%); color:white; padding: 6px 20px; font-size: 14px;">閉じる</button>
-                   </div>
-                   <div class="content" style="font-size:16px; margin-top:16px; word-wrap: break-word; overflow-wrap: break-word; overflow-y: scroll; max-height: 68vh;">${data['content']}</div>
-                   <div class="footer-wrapper" style="display:flex; justify-content: space-between; align-items: center; margin-top: 40px;">
-                     <h6 class="notification-date" style="font-size:14px;">${data['create_notification_date_time']}</h6>
-                     <h6 class="notification_author" style="font-size:14px; color: darkgreen;">${words[4]}</h6>
-                   </div>
-                 </div>
-               </div>`;
-
+             const container = document.createElement('div');
+             container.id = "notification-root";
+                if(isMobileScreen.matches){
+                    container.innerHTML = `<div class="notification-container" style="position:absolute; top:0; background-color:#fff; height:100vh; width:100vw;">
+                         <div class="title" style="font-size: 14px; font-weight: bold; margin:14px 0 0 8px; max-width: 80%;">${data['name']}</div>
+                         <button class="close-button" onclick="window.location.reload();" style="background-color:#A3B9E2; border:0; border-radius: 5px; box-shadow: 0 2px 4px rgb(0 0 0 / 20%); color:white; padding: 6px 8px; font-size: 11px; position: fixed; top: 0;right: 0; margin:8px 16px 0 0;">閉じる</button>
+                         <div class="content" style="font-size:13px; margin:16px 0 0 8px; word-wrap: break-word; overflow-wrap: break-word; overflow-y: scroll; min-height: 75vh; max-height: 85vh;">${data['content']}</div>
+                         <div class="notification-date" style="position: fixed; left: 0; display:inline-block; font-size:13px; margin:8px 0 0 8px;">${data['create_notification_date_time']}</div>
+                         <div class="notification_author" style="position: fixed; right: 0; display:inline-block; font-size:13px; color: darkgreen; margin:8px 16px 0 0;">${words[4]}</div>
+                    </div>`;
+                }else{
+                    container.innerHTML = `<div class="notification-container" style="position:absolute; background-color:rgba(0,0,0,0.3); height:100vh; width:100vw; display:flex; justify-content: center; align-items: center; top:0;">
+                         <div class="wrapper" style="background-color:#fff; border-radius:8px; padding:20px 40px; max-width:80%; min-width: 50%;">
+                             <div class="heading-wrapper" style="display:flex; justify-content: space-between; align-items: center;">
+                                 <h2 class="title" style="margin:auto; word-wrap: break-word; white-space: pre-wrap; max-width: 80%;">${data['name']}</h2>
+                                 <button class="close-button" onclick="window.location.reload();" style="min-width: 88px; background-color:#A3B9E2; border:0; border-radius: 5px; box-shadow: 0 2px 4px rgb(0 0 0 / 20%); color:white; padding: 6px 20px; font-size: 14px;">閉じる</button>
+                             </div>
+                             <div class="content" style="font-size:16px; margin-top:16px; word-wrap: break-word; overflow-wrap: break-word; overflow-y: scroll; max-height: 68vh;">${data['content']}</div>
+                             <div class="footer-wrapper" style="display:flex; justify-content: space-between; align-items: center; margin-top: 40px;">
+                                 <h6 class="notification-date" style="font-size:14px;">${data['create_notification_date_time']}</h6>
+                                 <h6 class="notification_author" style="font-size:14px; color: darkgreen;">${words[4]}</h6>
+                             </div>
+                         </div>
+                    </div>`;
+                }
                document.body.appendChild(container);
            }
          });
