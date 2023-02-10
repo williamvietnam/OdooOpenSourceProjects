@@ -98,7 +98,7 @@
                                                 <a t-att-href="base_url + '/web/content/?model=document.document&amp;id=' + str(document.id) + '&amp;field=file_data&amp;filename_field=name&amp;download=true' "
                                                    class="pull-right" title="Download">
                                                     <i class="fa fa-download fa-2x" role="img"
-                                                       aria-label="Download"/>
+                                                       aria-label="Download"></i>
                                                 </a>
                                             </td>
                                         </tr>

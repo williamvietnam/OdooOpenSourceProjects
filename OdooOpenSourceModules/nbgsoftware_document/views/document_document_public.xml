@@ -119,10 +119,10 @@
                                                     class="btn btn-secondary fa fa-download"/>
                                             <span class="text-success mb4" t-if="record.is_public.raw_value">
                                                 <i class="fa fa-circle" role="img" aria-label="Blacklist"
-                                                   title="Blacklist"/>
+                                                   title="Blacklist"></i>
                                             </span>
                                             <span class="text-gray mb4" t-if="!record.is_public.raw_value">
-                                                <i class="fa fa-circle" role="img" aria-label="Other" title="Other"/>
+                                                <i class="fa fa-circle" role="img" aria-label="Other" title="Other"></i>
                                             </span>
                                         </div>
                                     </div>

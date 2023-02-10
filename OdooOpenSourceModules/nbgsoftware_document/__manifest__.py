@@ -13,8 +13,6 @@
     'author': '',
     'depends': ['nbgsoftware_application'],
     'data': [
-        'security/ir.model.access.csv',
-        'views/assets.xml',
         'security/document_security.xml',
         'security/app_security.xml',
         'security/ir.model.access.csv',
@@ -26,7 +24,7 @@
         'views/menu.xml',
         'views/portal_document_templates.xml',
         'views/ui_app_document_view.xml',
-
+        'data/ir_cron_data.xml',
     ],
     'installable': True,
     'auto_install': False,
