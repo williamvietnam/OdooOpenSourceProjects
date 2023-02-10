@@ -6,10 +6,10 @@ class DocumentDocumentPublic(models.Model):
     _name = 'document.document.public'
 
     def _get_users_domain(self):
-        group_user = self.env.ref('base.group_system', raise_if_not_found=False)
+        group_user = self.env.ref('base.group_system')
         if group_user:
             admin_ids = group_user.users
-            return ['&', ('id', 'not in', admin_ids.ids), ('id', '!=', self.env.uid)] if admin_ids else []
+            return [('id', 'not in', admin_ids.ids), ('id', '!=', self.env.uid)] if admin_ids else []
         else:
             return []
 
@@ -43,12 +43,11 @@ class DocumentDocumentPublic(models.Model):
     def save_to_file(self):
         return {
             'type': 'ir.actions.act_url',
-            'url': '/web/content/?model=document.document&id={}&field=file_data&filename_field=name&download=true'.format(
+            'url': '/web/content/?model=document.document.public&id={}&field=file_data&filename_field=name&download=true'.format(
                 self.id
             ),
             'target': 'self',
         }
-
 
 class IrAttachment(models.Model):
     _inherit = ['ir.attachment']
