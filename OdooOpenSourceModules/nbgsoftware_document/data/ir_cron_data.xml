@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+    <data>
+       <record id="default_user_rule_document" model="ir.cron">
+           <field name="name">Update User Rule Document</field>
+           <field name="model_id" ref="model_res_users"/>
+           <field name="state">code</field>
+           <field name="code">model._default_user_rule_document()</field>
+           <field name="user_id" ref="base.user_root"/>
+           <field name="numbercall">-1</field>
+           <field name="active" eval="False"/>
+        </record>
+    </data>
+</odoo>
