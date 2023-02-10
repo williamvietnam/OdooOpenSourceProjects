@@ -27,13 +27,15 @@ class DocumentFolder(models.Model):
 
     @api.model
     def create(self, vals):
-        if not self.env.is_admin():
+        super_admin_ids = self.env.ref('base.group_system').users.ids
+        if self.env.uid not in super_admin_ids:
             if not vals.get('parent_folder_id'):
                 raise ValidationError(_('The parent folder must be required!'))
         return super(DocumentFolder, self).create(vals)
 
     def write(self, vals):
-        if not self.env.is_admin():
+        super_admin_ids = self.env.ref('base.group_system').users.ids
+        if self.env.uid not in super_admin_ids:
             if not vals.get('parent_folder_id'):
                 raise ValidationError(_('The parent folder must be required!'))
         return super(DocumentFolder, self).write(vals)
